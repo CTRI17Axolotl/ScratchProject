@@ -6,8 +6,13 @@ const router = express.Router();
 
 // set up routers
 
-router.get("/", dbController.getListings, (req, res) => {
-    res.status(200).json(res.locals.listings)
+router.get("/:name", dbController.getUser, (req, res) => {
+    res.status(200).json(res.locals.foundUser)
+})
+
+
+router.post('/', dbController.createUser, (req, res) => {
+    res.status(200).json(res.locals.newUser);
 })
 
 module.exports = router;
