@@ -33,18 +33,18 @@ module.exports = {
         loader: 'file-loader',
       },
       {
-        test: /\.css$/, // for style/css loading
-        use: ['style-loader', 'css-loader'],
+        test: /\.s?css$/, // for style/css loading
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
   devServer: {
-    host: '127.0.0.1', 
-    port: 8080, //Defines the port number on which the development server will run. 
+    host: '127.0.0.1',
+    port: 8080, //Defines the port number on which the development server will run.
     // static: { //Configures the static file serving behavior of the development server.
     //   directory: //Specifies the directory from which static files will be served.
     //      path.resolve(__dirname, 'dist'),
-    //   publicPath: '/', //Sets the public URL path where the bundled files will be served from. 
+    //   publicPath: '/', //Sets the public URL path where the bundled files will be served from.
     // },
     // Once we build out file structure, look into proxy server
   },
