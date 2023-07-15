@@ -2,4 +2,4 @@
 
 Artist marketplace scratch project
 
-KYLE, WES, MIKE
+KYLE, WES, MIKE, WADE
