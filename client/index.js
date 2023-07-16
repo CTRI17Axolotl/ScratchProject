@@ -13,7 +13,6 @@ ReactDOM.render(
   root
 );
 
-
 // import createRoot if we need this
 // const root = createRoot(document.getElementById('root'))
 // root.render(
