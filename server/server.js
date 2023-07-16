@@ -1,40 +1,44 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const router = require('./routers.js')
-const port = process.env.PORT || 8080;
+const userRouter = require('./routers/userRouter.js')
+const itemRouter = require('./routers/itemRouter.js')
+const PORT = process.env.PORT || 3000;
 const mongoose = require('mongoose');
+const dotenv = require('dotenv').config(); // required to use process.env.access_key
 
-// const publicDirectoryPath = path.join(__dirname, "public");
-// app.use(express.static(publicDirectoryPath));
 
-mongoose.connect('mongodb+srv://wadechadwick13:m1ScvSA6ygHJepDO@scratchproject.d8nmjyq.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`${process.env.ACCESS_KEY}`, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
 
+
 app.use(express.urlencoded({ extended: true }));
-
-
-// parse incoming requests
 app.use(express.json());
 
-// serve static files
-
-// route handlers
-app.use('/users', router)
 
 
+app.use('/users', userRouter);
 
-app.get('/', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, 'index.html'))
+app.use('/items', itemRouter)
+
+
+// Unknown route handler
+app.use((req, res) => res.sendStatus(404));
+
+// Global error handler
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 400,
+    message: { err: 'An error occurred' },
+  };
+  const errorObj = Object.assign({}, defaultErr, err);
+  console.log(errorObj.log);
+  return res.status(errorObj.status).json(errorObj.message);
 });
 
-
-
-app.listen(port, () => {
-console.log(`Server is listening on port ${port}`)
+app.listen(3000, () => {
+  console.log('Listening on 3000')
 });
-
-
-module.exports = app;
