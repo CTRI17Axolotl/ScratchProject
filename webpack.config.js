@@ -36,8 +36,8 @@ module.exports = {
         loader: 'file-loader',
       },
       {
-        test: /\.css$/, // for style/css loading
-        use: ['style-loader', 'css-loader'],
+        test: /\.s?css$/, // for style/css loading
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -58,7 +58,7 @@ module.exports = {
     // static: { //Configures the static file serving behavior of the development server.
     //   directory: //Specifies the directory from which static files will be served.
     //      path.resolve(__dirname, 'dist'),
-    //   publicPath: '/', //Sets the public URL path where the bundled files will be served from. 
+    //   publicPath: '/', //Sets the public URL path where the bundled files will be served from.
     // },
     // Once we build out file structure, look into proxy server
   },
