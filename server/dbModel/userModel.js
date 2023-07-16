@@ -3,11 +3,11 @@ const { Schema } = mongoose;
 
 
 
-const user = new Schema({
+const User = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  age: { type: Number, required: true }
-})
+  email: { type: String, required: true }
+}, { collection: 'Users' });
 
 
-module.exports = mongoose.model('User', user);
+module.exports = mongoose.model('User', User);

@@ -41,6 +41,17 @@ module.exports = {
   devServer: {
     host: '127.0.0.1', 
     port: 8080, //Defines the port number on which the development server will run. 
+    static: {
+      directory: path.resolve(__dirname, '/dist')
+    },
+    proxy: {
+      publicPath: '/build',
+      '/users/*': 'http://localhost:3000'
+    //   '/': {
+    //     target: 'http://localhost:8080',
+    //     secure: false,
+    //   }
+    }
     // static: { //Configures the static file serving behavior of the development server.
     //   directory: //Specifies the directory from which static files will be served.
     //      path.resolve(__dirname, 'dist'),
