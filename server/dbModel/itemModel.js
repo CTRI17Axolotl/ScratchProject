@@ -8,7 +8,7 @@ const Item = new Schema({
   // artist
   artist: { type: String, required: true },
   // link
-  image: { type: Buffer, required: false },
+  image: { type: String, data: Buffer, required: false },
   // description
   description: { type: String, required: false },
   // price

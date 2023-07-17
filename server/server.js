@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config(); // required to use process.env.access_key
 
 
-mongoose.connect(`${process.env.ACCESS_KEY}`, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`mongodb+srv://wadechadwick13:WHTLrIICWe5OADdq@scratchproject.d8nmjyq.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });

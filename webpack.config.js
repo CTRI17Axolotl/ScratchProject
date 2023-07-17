@@ -1,6 +1,8 @@
 // require in needed methods
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
 
 // build module exports
 
@@ -15,9 +17,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: '/index.html',
     }),
-    new webpack.DefinePlugin( {
-      "process.env": dotenv.parsed
-    })
+    new webpack.DefinePlugin({
+      'process.env': dotenv.parsed,
+    }),
   ],
   module: {
     rules: [
@@ -42,19 +44,20 @@ module.exports = {
     ],
   },
   devServer: {
-    host: '127.0.0.1', 
-    port: 8080, //Defines the port number on which the development server will run. 
+    host: '127.0.0.1',
+    port: 8080, //Defines the port number on which the development server will run.
     static: {
-      directory: path.resolve(__dirname, '/dist')
+      directory: path.resolve(__dirname, '/dist'),
     },
     proxy: {
       publicPath: '/build',
-      '/users/*': 'http://localhost:3000'
-    //   '/': {
-    //     target: 'http://localhost:8080',
-    //     secure: false,
-    //   }
-    }
+      '/users/*': 'http://localhost:3000',
+      '/items/*': 'http://localhost:3000'
+      //   '/': {
+      //     target: 'http://localhost:8080',
+      //     secure: false,
+      //   }
+    },
     // static: { //Configures the static file serving behavior of the development server.
     //   directory: //Specifies the directory from which static files will be served.
     //      path.resolve(__dirname, 'dist'),

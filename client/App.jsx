@@ -11,8 +11,8 @@ import findArt from './components/findArt.jsx';
 const App = () => {
   return (
     <div>
-      <NavBar />
-      <FeedDisplay />
+      <NavBar id="navBar"/>
+      <FeedDisplay id="feedDisplay"/>
 
     </div>
   );
