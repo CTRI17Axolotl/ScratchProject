@@ -18,19 +18,5 @@ const App = () => {
   );
 };
 
-// const App = () => {
-//   return (
-//     <div>
-//       <NavBar />
-//       <Routes>
-//           <Route path="/createArt" element={<createArt />} />
-//           <Route path="/findArt" element={<findArt />} />
-//           <Route path="/updateArt" element={<updateArt />}/>
-//           <Route path="/deleteArt" element={<deleteArt />} />
-//         </Routes>
-
-//            </div>
-//   );
-// };
 
 export default App;
