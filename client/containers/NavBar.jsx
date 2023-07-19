@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Stack, AppBar, Toolbar, Typography } from '@mui/material';
+import UploadWidget from '../components/UploadWidget.jsx';
 
 const NavBar = () => {
 
@@ -190,6 +191,7 @@ const NavBar = () => {
       <button id="deleteArtButton" onClick={handleNavBarClick}>
         DELETE ART
       </button>
+      <UploadWidget/>
 
       <form id="userSubmissionForm" onSubmit={submitClickHandler}>
         <div>
