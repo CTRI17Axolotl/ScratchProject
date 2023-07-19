@@ -20,10 +20,27 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     event.preventDefault();
-    console.log(username);
-    console.log(password);
+    fetch('/users/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: username,
+        password: password
+      }),
+      headers: {
+        "Content-Type": 'application/json'
+      }
+    })
+    .then(res => {
+      if(!response.ok){
+        //some logic to either say wrong username/password
+        //OR a change in the route to change it into a sign up page
+      }
+    })
+    //some additional logic regarding the response
     //perform authentication logic here with user database here!!
-    nav('/');
+    .catch(err => {
+      
+    })
   };
 
 //use inputValue to fetch for user database
