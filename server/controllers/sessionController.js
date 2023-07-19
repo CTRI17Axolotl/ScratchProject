@@ -46,9 +46,10 @@ sessionController.startSession = async (req, res, next) => {
   try {
     const { username } = req.body;
     const storedUser = await User.findOne({ username });
-    const newSesh = Session.create({
-      cookieId: `${username._id}`,
-    });
+    // const newSesh = Session.create({
+    //   cookieId: `${username._id}`,
+    // });
+    console.log(storedUser);
     return next();
   } catch (err) {
     return next(
