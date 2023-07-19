@@ -1,6 +1,6 @@
 const express = require('express');
 // const itemController = require('../controllers/artPieceController.js');
-const artPieceController = require('../controllers/artPieceController.js');
+const artPieceController = require('../controllers/piecesController.js');
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-const ArtPiece = require('../dbModel/artPieceModel');
+const ArtPiece = require('../dbModel/piecesModel');
 const jwt = require('jsonwebtoken');
 const { generateSecretKey } = require('../utils/helpers');
 
