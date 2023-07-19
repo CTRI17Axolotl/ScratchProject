@@ -17,6 +17,9 @@ const App = () => {
       <button onClick={() => nav('signin', { state: 'data' })}>
         Sign in here!
       </button>
+      <button onClick={() => nav('addPiece', { state: 'data' })}>
+        Upload Piece here!
+      </button>
     </div>
   );
 };

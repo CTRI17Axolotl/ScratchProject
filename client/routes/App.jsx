@@ -11,6 +11,7 @@ import Home from './Home.jsx';
 import User from './User.jsx';
 import SignIn from './SignIn.jsx';
 import '../styles.scss';
+import AddPiece from './AddPiece.jsx';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/addPiece" element={<AddPiece />} />
         <Route path="/user/:userId" element={<User />} />
       </Routes>
     </div>
