@@ -15,7 +15,7 @@ module.exports = {
   mode: 'development',
   plugins: [
     new HtmlWebpackPlugin({
-      template: '/index.html',
+      template: './client/index.html',
     }),
     new webpack.DefinePlugin({
       'process.env': dotenv.parsed,
