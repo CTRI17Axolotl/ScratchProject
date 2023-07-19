@@ -1,133 +1,100 @@
-#userSubmissionForm {
-  display: none;
-  font-family: 'Comic Sans MS';
-}
+$ax-color: rgb(228, 35, 190);
+$st-color: rgba(97, 145, 215, 1);
+$container-bg-color: rgba(210, 210, 210, 0.3);
+$gray1: rgb(30, 30, 30);
+$gray2: rgb(70, 70, 70);
+$gray3: rgb(120, 120, 120);
+$fontpick: 'Trebuchet MS';
+$shadow1: rgba(0, 0, 0, 0.35) 0px 5px 12px;
+$shadow2: rgba(0, 0, 0, 0.55) 0px 5px 25px;
 
-h1 {
-  font-family: 'Comic Sans MS'; // someone find cuter font
-  text-align: center;
-  color: white;
-}
-
-button {
-  font-family: 'Comic Sans MS';
-}
-
-.formButtons input {
-  font-family: 'Comic Sans MS';
-}
-
-#feedDisplay {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(200px, 1fr));
-  grid-gap: 30px;
+.center-container {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin: 0 auto;
-  max-width: 900px;
+}
+.gallery-container {
+  width: 95%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+  gap: 0.7rem, 0.7rem;
 }
 
-.itemName,
-.artist,
-.price,
-.description,
-.feedItemButtonsRow {
-  padding: 0.5em;
-}
-
-.formButtons input,
-.inputBidButton,
-.buyItemButton,
-#createArtButton,
-#deleteArtButton,
-#updateArtButton,
-#uploadImage {
-  padding: 0.5em;
-  margin-left: 0.4rem;
-  border-radius: 10px;
-  background-color: white;
-  border: 1px solid black;
-}
-
-#createArtButton,
-#deleteArtButton,
-#updateArtButton,
-#uploadImage {
-  background-color: rgb(255, 227, 225);
-}
-
-.formButtons input:hover,
-.inputBidButton:hover,
-.buyItemButton:hover,
-#createArtButton:hover,
-#deleteArtButton:hover,
-#updateArtButton:hover,
-#uploadImage:hover {
-  cursor: pointer;
-  background-color: rgb(154, 25, 128);
-  color: white;
-}
-
-.feedItem {
-  border-radius: 10px;
-  border-width: 2px;
+.piece-container {
+  // background-color: rgb(230, 230, 230);
+  background-color: $container-bg-color;
+  box-shadow: $shadow1;
+  width: 380px;
+  height: 520px;
+  margin: 10px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: rgb(255, 227, 225);
-  font-family: 'Comic Sans MS';
-  transition: transform 0.3s ease;
-  box-shadow: rgba(254, 205, 211, 0.1) 0px 4px 16px,
-    rgba(254, 205, 211, 0.1) 0px 8px 24px,
-    rgba(254, 205, 211, 0.1) 0px 16px 56px;
-}
-
-#navBar {
-  display: flex;
-  justify-content: center;
-  background-color: pink;
-  margin-bottom: 1em;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  // border: 0.2em solid white;
-}
-
-.feedItem:hover {
-  transform: scale(1.1);
-}
-
-.feedItemButtonsRow button {
-  background-color: rgb(251, 172, 185);
-  transition: background-color 0.3s ease;
-}
-// rgb(130, 54, 47)
-.feedItemButtonsRow button:hover {
-  background-color: rgb(228, 35, 190);
-}
-
-.subArr--container {
-  display: flex;
-  padding: 2rem;
+  align-items: center;
   justify-content: space-around;
+
+  .piece-image-container {
+    flex: 0 0 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .piece-image {
+      max-height: 350px;
+      width: auto;
+      max-width: 350px;
+    }
+  }
+  .piece-content {
+    height: 150px;
+    width: 330px;
+    background-color: rgba(228, 35, 190, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .piece-text {
+      padding: 10px;
+      width: 70%;
+      height: 110px;
+      display: flex;
+
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      p {
+        margin: 0px;
+        margin-left: 10px;
+        color: $gray2;
+        font-family: $fontpick;
+        font-weight: bolder;
+        font-size: larger;
+      }
+      :first-child {
+        font-size: x-large;
+        margin-left: 0px;
+        color: $gray1;
+      }
+    }
+    .piece-buttons {
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      img,
+      p {
+        margin: 5px;
+      }
+    }
+  }
+
+  .signin-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
-
-#root,
-h1 {
-  background-color: rgb(251, 172, 185);
+.piece-container:hover {
+  box-shadow: $shadow2;
 }
-
-html {
-  background-color: rgb(251, 172, 185);
-}
-/*
-#FFF5E4
-#FFE3E1
-#FFD1D1
-#FF9494
-
-rgb(255, 245, 228)
-rgb(255, 227, 225)
-rgb(255, 209, 209)
-rgb(255, 148, 148)
-
-
-*/
