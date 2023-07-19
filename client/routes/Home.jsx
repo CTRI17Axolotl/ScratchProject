@@ -10,19 +10,27 @@ const Home = () => {
   const { fullPieceList, currentFilters, updateFilteredList } =
     useContext(StoreContext); // destructure dataStore vars for use
 
-    // useEffect(() => {
-    //   updateFilteredList();
-    // }, [fullPieceList, currentFilters]);
+  // useEffect(() => {
+  //   updateFilteredList();
+  // }, [fullPieceList, currentFilters]);
   return (
     <div className="base-container">
       <h1>Stork Art Fair</h1>
+      <div style={{ textAlign: 'center' }}>
+        <span>
+          <button onClick={() => nav('signin')}>Sign In</button>
+        </span>
+        <span>
+          <button onClick={() => nav('addPiece')}>Add Piece</button>
+        </span>
+      </div>
       <Gallery pieceList={fakeData.data}></Gallery>
-      <Link to={'user/17'} state={{ test: '45' }}>
+      {/* <Link to={'user/17'} state={{ test: '45' }}>
         User 17
       </Link>
       <button onClick={() => nav('signin', { state: 'data' })}>
         Sign in here!
-      </button>
+      </button> */}
     </div>
   );
 };
