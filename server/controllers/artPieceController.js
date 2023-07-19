@@ -43,7 +43,7 @@ artPieceController.createArt = async (req, res, next) => {
     forSale,
     description,
     price,
-    collection,
+    style,
   } = req.body;
 
   try {
@@ -60,7 +60,7 @@ artPieceController.createArt = async (req, res, next) => {
       forSale,
       description,
       price,
-      collection,
+      style,
     });
     res.locals.newArt = newArt;
     return next();
@@ -89,7 +89,7 @@ artPieceController.updateArt = async (req, res, next) => {
       newBuyer,
       newSeller,
       newForSale,
-      newCollection,
+      newStyle,
     } = req.body;
     const updatedArt = await ArtPiece.findOneAndUpdate(
       { title: newTitle },
@@ -105,7 +105,7 @@ artPieceController.updateArt = async (req, res, next) => {
         buyer: newBuyer,
         seller: newSeller,
         forSale: newForSale,
-        collection: newCollection,
+        style: newStyle,
       },
       { new: true }
     );

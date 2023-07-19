@@ -6,9 +6,8 @@ const artPieceRouter = require('./routers/artPieceRouter.js');
 const PORT = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config(); // required to use process.env.access_key
-
 mongoose.connect(
-  `mongodb+srv://aderritt6158:qjxKqRlDpUZ9ZStC@cluster0.rti6q70.mongodb.net/`,
+  'mongodb+srv://aderritt6158:qjxKqRlDpUZ9ZStC@cluster0.rti6q70.mongodb.net/sandbox?retryWrites=true&w=majority',
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 mongoose.connection.once('open', () => {
