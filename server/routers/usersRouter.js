@@ -2,7 +2,7 @@ const express = require('express');
 
 //import Controllers
 const dbController = require('../controllers/dbController.js');
-const authController = require('../controllers/authenticationController');
+const authController = require('../controllers/authenticationController.js');
 
 //initialize our router
 const router = express.Router();

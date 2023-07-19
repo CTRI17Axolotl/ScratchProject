@@ -5,6 +5,13 @@ const { generateSecretKey } = require('../utils/helpers');
 
 const authController = {};
 
+//FrontEnd tracking active session 
+  //doesn't need to persist
+//adding/removing new fav requires auth
+//adding images
+//edit
+
+
 const createErr = (errInfo) => {
   const { method, type, err } = errInfo;
   return {
@@ -35,9 +42,9 @@ authController.userLogin = async (req, res, next) => {
     }
     const passwordMatch = await bcrypt.compare(password, user.password);
 
-    if (passworMatch) {
+    if (passwordMatch) {
       const token = generateAuthToken(user._id);
-      res.status(200).json({ token, redirect: '/homepage' });
+      res.status(200).json({ token, redirect: '/' });
     } else {
       res.status(400).json({ redirect: '/login' });
     }

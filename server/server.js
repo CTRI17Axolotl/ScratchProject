@@ -6,8 +6,8 @@ const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 3000;
 
 //Routes
-const userRouter = require('./routers/userRouter.js');
-const artPieceRouter = require('./routers/artPieceRouter.js');
+const userRouter = require('./routers/usersRouter.js');
+const artPieceRouter = require('./routers/piecesRouters.js');
 
 //require utils helper func for key
 const { generateSecretKey } = require('./utils/helpers.js');
@@ -35,8 +35,8 @@ app.use(express.urlencoded({ extended: true }));
 //cookie parser
 app.use(cookieParser());
 
-app.use('/users', userRouter);
-app.use('/items', artPieceRouter);
+app.use('/users', usersRouter);
+app.use('/pieces', piecesRouter);
 
 //serve static files
 app.get('/', (req, res) => {

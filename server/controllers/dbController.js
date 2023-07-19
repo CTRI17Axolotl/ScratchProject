@@ -53,12 +53,12 @@ dbController.createUser = async (req, res, next) => {
     const userId = decodedToken.userId;
 
     const newUser = await User.create({
+      //userId
       name,
       email,
       address,
       password,
-      username: userId,
-      session,
+      username: session,
       favorites,
     });
     res.locals.newUser = newUser;
@@ -72,65 +72,65 @@ dbController.createUser = async (req, res, next) => {
   }
 };
 
-dbController.updateUser = async (req, res, next) => {
-  try {
-    const { name } = req.params;
-    const {
-      newEmail,
-      newAddress,
-      newUserName,
-      newPassword,
-      newSession,
-      newFavorites,
-    } = req.body;
+// dbController.updateUser = async (req, res, next) => {
+//   try {
+//     const { name } = req.params;
+//     const {
+//       newEmail,
+//       newAddress,
+//       newUserName,
+//       newPassword,
+//       newSession,
+//       newFavorites,
+//     } = req.body;
 
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = verifyToken(token);
-    const userId = decodedToken.userId;
+//     const token = req.headers.authorization.split(' ')[1];
+//     const decodedToken = verifyToken(token);
+//     const userId = decodedToken.userId;
 
-    const updatedUser = await User.findOneAndUpdate(
-      { firstName: name },
-      {
-        email: newEmail,
-        address: newAddress,
-        username: newUserName,
-        password: newPassword,
-        session: newSession,
-        favorites: newFavorites,
-      },
-      { new: true }
-    );
-    res.locals.updatedUser = updatedUser;
-    return next();
-  } catch (err) {
-    return next({
-      log: `The following error occured: ${err}`,
-      status: 400,
-      message: { err: 'An error occured while trying to update a user' },
-    });
-  }
-};
+//     const updatedUser = await User.findOneAndUpdate(
+//       { firstName: name },
+//       {
+//         email: newEmail,
+//         address: newAddress,
+//         username: newUserName,
+//         password: newPassword,
+//         session: newSession,
+//         favorites: newFavorites,
+//       },
+//       { new: true }
+//     );
+//     res.locals.updatedUser = updatedUser;
+//     return next();
+//   } catch (err) {
+//     return next({
+//       log: `The following error occured: ${err}`,
+//       status: 400,
+//       message: { err: 'An error occured while trying to update a user' },
+//     });
+//   }
+// };
 
-dbController.deleteUser = async (req, res, next) => {
-  const { name } = req.params;
-  try {
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = verifyToken(token);
-    const userId = decodedToken.userId;
+// dbController.deleteUser = async (req, res, next) => {
+//   const { name } = req.params;
+//   try {
+//     const token = req.headers.authorization.split(' ')[1];
+//     const decodedToken = verifyToken(token);
+//     const userId = decodedToken.userId;
 
-    const deletedUser = await User.findOneAndDelete({
-      firstName: name,
-      username: userId,
-    });
-    res.locals.deletedUser = deletedUser;
-    return next();
-  } catch (err) {
-    return next({
-      log: `The following error occured: ${err}`,
-      status: 400,
-      message: { err: 'An error occured while trying to delete a user' },
-    });
-  }
-};
+//     const deletedUser = await User.findOneAndDelete({
+//       firstName: name,
+//       username: userId,
+//     });
+//     res.locals.deletedUser = deletedUser;
+//     return next();
+//   } catch (err) {
+//     return next({
+//       log: `The following error occured: ${err}`,
+//       status: 400,
+//       message: { err: 'An error occured while trying to delete a user' },
+//     });
+//   }
+// };
 
 module.exports = dbController;
