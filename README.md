@@ -4,7 +4,7 @@ POST /pieces -- receive new art piece: {title, image, artist, description, owner
 PUT /pieces/:pieceId -- receive updatable fields {description, forSale, price}, Authenticate update the req.params.pieceId piece in the db, and send newly updated array of all pieces.
 
 GET /users -- send array of *some* data for all users -- userId, name, email, and favorites   
-POST /users/login -- receive username, password -- verify user, return session
+POST /users/login -- receive username, password -- verify user, return session 
 POST /users/create -- receive username, password, name, email -- create user if valid, return session
 ~~POST /users/logout -- destroy session (is this necessary?)~~
 PUT /users/updateFaves -- receive array of pieceId, authenticate, update that user's favorites, return updated array for all users (see GET /users)

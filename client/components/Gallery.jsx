@@ -9,7 +9,7 @@ const Gallery = ({ pieceList }) => {
   useEffect(() => {
     const newPieceViews = [];
     pieceList.forEach((element) => {
-      const newPieceView = <Piece pieceData={element} />;
+      const newPieceView = <Piece pieceData={element} key={element.pieceId} />;
       newPieceViews.push(newPieceView);
     });
     setPieceViews(newPieceViews);

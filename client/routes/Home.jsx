@@ -1,11 +1,14 @@
 // Imports
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Gallery from '../components/Gallery.jsx';
 import fakeData from '../components/Placeholder.jsx';
+import { StoreContext } from './dataStore.js';
 
-const App = () => {
+const Home = () => {
   const nav = useNavigate();
+  const { testState } = useContext(StoreContext); // destructure dataStore vars for use 
+
 
   return (
     <div className="base-container">
@@ -21,4 +24,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
