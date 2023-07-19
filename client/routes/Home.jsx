@@ -1,5 +1,5 @@
 // Imports
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Gallery from '../components/Gallery.jsx';
 import fakeData from '../components/Placeholder.jsx';
@@ -7,9 +7,12 @@ import { StoreContext } from './dataStore.js';
 
 const Home = () => {
   const nav = useNavigate();
-  const { testState } = useContext(StoreContext); // destructure dataStore vars for use 
+  const { fullPieceList, currentFilters, updateFilteredList } =
+    useContext(StoreContext); // destructure dataStore vars for use
 
-
+    // useEffect(() => {
+    //   updateFilteredList();
+    // }, [fullPieceList, currentFilters]);
   return (
     <div className="base-container">
       <h1>Stork Art Fair</h1>

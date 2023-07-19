@@ -19,23 +19,9 @@ export default ({ children }) => {
   const [userList, setUserList] = useState([]); // user list
   const [activeUser, setActiveUser] = useState(false); // logged in user
 
-  // Component-Accessible Store Values
-  const store = {
-    setFullPieceList: setFullPieceList, // update fetched list
-    filteredPieceList: filteredPieceList, // gallery display list
-    currentFilters: currentFilters,
-    setCurrentFilters: setCurrentFilters,
-    currentPieceFocus: currentPieceFocus,
-    setCurrentPieceFocus: setCurrentPieceFocus,
-    userList: userList, //
-    setUserList: setUserList,
-    activeUser: activeUser,
-    setActiveUser: setActiveUser,
-  };
 
-  useEffect(() => {
-    updateFilteredList();
-  }, [fullPieceList, currentFilters]);
+
+
 
   const updateFilteredList = () => {
     const currentPieceList = [...fullPieceList];
@@ -93,6 +79,21 @@ export default ({ children }) => {
       ];
     }
     return array;
+  };
+
+  // Component-Accessible Store Values
+  const store = {
+    setFullPieceList: setFullPieceList, // update fetched list
+    filteredPieceList: filteredPieceList, // gallery display list
+    updateFilteredList: updateFilteredList,
+    currentFilters: currentFilters,
+    setCurrentFilters: setCurrentFilters,
+    currentPieceFocus: currentPieceFocus,
+    setCurrentPieceFocus: setCurrentPieceFocus,
+    userList: userList, //
+    setUserList: setUserList,
+    activeUser: activeUser,
+    setActiveUser: setActiveUser,
   };
 
   return (
