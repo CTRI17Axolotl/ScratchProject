@@ -12,49 +12,66 @@ $shadow2: rgba(0, 0, 0, 0.55) 0px 5px 25px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
+.base-container {
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 80px;
+  margin: 30px;
+}
+
 .gallery-container {
-  width: 95%;
+  width: 98%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 0.7rem, 0.7rem;
 }
 
 .piece-container {
   // background-color: rgb(230, 230, 230);
-  background-color: $container-bg-color;
-  box-shadow: $shadow1;
-  width: 380px;
-  height: 520px;
-  margin: 10px;
-  margin-bottom: 40px;
+
+  width: 330px;
+  height: 420px;
+  margin: 3px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  transition: 0.6s;
+  border-radius: 5px;
 
   .piece-image-container {
-    flex: 0 0 350px;
+    flex: 0 0 330px;
     display: flex;
     align-items: center;
     justify-content: center;
     .piece-image {
-      max-height: 350px;
+      max-height: 330px;
       width: auto;
-      max-width: 350px;
+      max-width: 330px;
+      border-radius: 5px;
+      box-shadow: $shadow1;
     }
   }
   .piece-content {
-    height: 150px;
+    min-height: 90px;
     width: 330px;
-    background-color: rgba(228, 35, 190, 0.2);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-around;
+    align-items: flex-start;
+    transition: 1.5s;
+
+    opacity: 0;
     .piece-text {
       padding: 10px;
       width: 70%;
-      height: 110px;
+      height: 80px;
       display: flex;
 
       flex-direction: column;
@@ -66,10 +83,10 @@ $shadow2: rgba(0, 0, 0, 0.55) 0px 5px 25px;
         color: $gray2;
         font-family: $fontpick;
         font-weight: bolder;
-        font-size: larger;
+        font-size: large;
       }
       :first-child {
-        font-size: x-large;
+        font-size: larger;
         margin-left: 0px;
         color: $gray1;
       }
@@ -80,7 +97,7 @@ $shadow2: rgba(0, 0, 0, 0.55) 0px 5px 25px;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      height: 100px;
+      height: 80px;
       img,
       p {
         margin: 5px;
@@ -96,5 +113,9 @@ $shadow2: rgba(0, 0, 0, 0.55) 0px 5px 25px;
   }
 }
 .piece-container:hover {
-  box-shadow: $shadow2;
+  background-color: $container-bg-color;
+  box-shadow: $shadow1;
+  .piece-content {
+    opacity: 1;
+  }
 }
