@@ -36,21 +36,6 @@ artPieceController.createArt = async (req, res, next) => {
   console.log('req.query: ', req.query);
   // console.log('req: ', req);
   // console log the received response from the database
-  const {
-    artist,
-    genre,
-    medium,
-    dimensions,
-    title,
-    image,
-    owner,
-    buyer,
-    seller,
-    forSale,
-    description,
-    price,
-    style,
-  } = req.body;
 
   try {
     const token = req.headers.authorization.split(' ')[1];
@@ -58,19 +43,14 @@ artPieceController.createArt = async (req, res, next) => {
     const userId = decodedToken.userId;
 
     const newArt = await ArtPiece.create({
-      artist,
-      genre,
-      medium,
-      dimensions,
       title,
       image,
-      owner: userId,
-      buyer,
-      seller,
+      ownerId,
       forSale,
       description,
       price,
       style,
+      sizeClass,
     });
     res.locals.newArt = newArt;
     return next();
@@ -101,17 +81,6 @@ artPieceController.updateArt = async (req, res, next) => {
       newForSale,
       newStyle,
     } = req.body;
-
-    // 1 itemId: '',
-    // 2 ownerId: '',
-    // 3 artist: '',
-    // 4 title: '',
-    // 5 description: '',
-    // 6 style: '',
-    // 7 image: '',
-    // 8 price: 0,
-    // 9 sizeClass: 0,
-    // 10 forSale: false,
 
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = verifyToken(token);

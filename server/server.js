@@ -4,16 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
+const cookieController = require('./controllers/cookieController');
 //Routes
 const usersRouter = require('./routers/usersRouter.js');
 const piecesRouter = require('./routers/piecesRouter.js');
-
-//Controllers
-const usersController = require('./controllers/usersController');
-const cookieController = require('./controllers/cookieController');
-const sessionController = require('./controllers/sessionController');
-const authController = require('./controllers/authenticationController');
-const piecesController = require('./controllers/piecesController');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -41,7 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/client', express.static(path.resolve(__dirname, '../client')));
 
 //cookie parser
-// app.use(cookieParser());
+app.use(cookieParser());
 
 /**
  * root
@@ -56,38 +50,38 @@ app.get('/', cookieController.setCookie, (req, res) => {
  * serve the signup file
  * Might be taken care of on the front end not sure?
  */
-app.get('/signup', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/<SignUP PATH HERE>'));
-  //check thie signup route
-});
+// app.get('/users', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../client/<SignUP PATH HERE>'));
+//   //check thie signup route
+// });
 
 //Allows user to create user first then sets an SSID Cookie, then starts a session with the middleware
-app.post(
-  '/signup',
-  usersController.createUser, //creates a user
-  cookieController.setSSIDCookie, //sets SSID cookie during signup
-  sessionController.startSession, //starts a session during sign up
-  (req, res) => {
-    res.redirect('/');
-    //check this routing logic
-    //Should redirect back to login page? Or are we going straight to the home page?
-  }
-);
+// app.post(
+//   '/signin',
+//   usersController.createUser, //creates a user
+//   cookieController.setSSIDCookie, //sets SSID cookie during signup
+//   sessionController.startSession, //starts a session during sign up
+//   (req, res) => {
+//     res.redirect('/');
+//     //check this routing logic
+//     //Should redirect back to login page? Or are we going straight to the home page?
+//   }
+// );
 
 /**
  * login
  *
  */
-app.post(
-  '/login',
-  authController.userLogin, //verify's/auths the user logging in
-  cookieController.setCookie, //sets a cookie for the logging in user
-  sessionController.startSession, //starts a session for the logged in user
-  (req, res) => {
-    res.redirect('/');
-    //redirect to the home page
-  }
-);
+// app.post(
+//   '/login',
+//   authController.userLogin, //verifies/auths the user logging in
+//   cookieController.setCookie, //sets a cookie for the logging in user
+//   sessionController.startSession, //starts a session for the logged in user
+//   (req, res) => {
+//     res.redirect('/');
+//     //redirect to the home page
+//   }
+// );
 
 //Authorized Routes below
 app.use('/users', usersRouter);

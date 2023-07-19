@@ -49,7 +49,7 @@ sessionController.startSession = async (req, res, next) => {
     const newSesh = Session.create({
       cookieId: `${username._id}`,
     });
-    next();
+    return next();
   } catch (err) {
     return next(
       createErr({

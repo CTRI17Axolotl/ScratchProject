@@ -1,27 +1,38 @@
 // Imports
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Gallery from '../components/Gallery.jsx';
 import fakeData from '../components/Placeholder.jsx';
+import { StoreContext } from './dataStore.js';
 
-const App = () => {
+const Home = () => {
   const nav = useNavigate();
+  const { fullPieceList, currentFilters, updateFilteredList } =
+    useContext(StoreContext); // destructure dataStore vars for use
 
+  // useEffect(() => {
+  //   updateFilteredList();
+  // }, [fullPieceList, currentFilters]);
   return (
     <div className="base-container">
       <h1>Stork Art Fair</h1>
+      <div style={{ textAlign: 'center' }}>
+        <span>
+          <button onClick={() => nav('signin')}>Sign In</button>
+        </span>
+        <span>
+          <button onClick={() => nav('addPiece')}>Add Piece</button>
+        </span>
+      </div>
       <Gallery pieceList={fakeData.data}></Gallery>
-      <Link to={'user/17'} state={{ test: '45' }}>
+      {/* <Link to={'user/17'} state={{ test: '45' }}>
         User 17
       </Link>
       <button onClick={() => nav('signin', { state: 'data' })}>
         Sign in here!
-      </button>
-      <button onClick={() => nav('addPiece', { state: 'data' })}>
-        Upload Piece here!
-      </button>
+      </button> */}
     </div>
   );
 };
 
-export default App;
+export default Home;
