@@ -8,27 +8,27 @@ const dbController = {};
 // DELETE: delete a listing
 
 dbController.getUser = async (req, res, next) => {
-  try{
+  try {
     console.log(req.params);
     const { name } = req.params;
-    const user = await User.find({firstName: name})
+    const user = await User.find({ firstName: name });
     res.locals.foundUser = user;
     return next();
-  } catch(err){
+  } catch (err) {
     return next({
       log: `The following error occured: ${err}`,
       status: 400,
-      message: { err: 'An error occured while trying to find a user' }
+      message: { err: 'An error occured while trying to find a user' },
     });
   }
-}
+};
 
 dbController.createUser = async (req, res, next) => {
   // console.log('req: ', req.body);
   // format the query using the info passed in on the body
-  
+
   // console log the received response from the database
-  const { firstName, lastName, email, address } = req.body;
+  const { name, email, address, password, session, favorites } = req.body;
   console.log(req.body);
 
   // if(!firstName || !lastName || !age){
@@ -39,50 +39,74 @@ dbController.createUser = async (req, res, next) => {
   //   });
   // }
 
-  try{
-    await User.create({firstName, lastName, email, address})
+  try {
+    const newUser = await User.create({
+      name,
+      email,
+      address,
+      password,
+      username,
+      session,
+      favorites,
+    });
+    res.locals.newUser = newUser;
     return next();
-  } catch(err){
+  } catch (err) {
     return next({
       log: `The following error occured: ${err}`,
       status: 400,
-      message: { err: 'An error occured while trying to create a user' }
+      message: { err: 'An error occured while trying to create a user' },
     });
   }
-}
-
+};
 
 dbController.updateUser = async (req, res, next) => {
-  try{
+  try {
     const { name } = req.params;
-    const { newEmail, newAddress } = req.body;
-    const updatedUser = await User.findOneAndUpdate({firstName: name}, {email: newEmail, address: newAddress}, {new: true});
+    const {
+      newEmail,
+      newAddress,
+      newUserName,
+      newPassword,
+      newSession,
+      newFavorites,
+    } = req.body;
+    const updatedUser = await User.findOneAndUpdate(
+      { firstName: name },
+      {
+        email: newEmail,
+        address: newAddress,
+        username: newUserName,
+        password: newPassword,
+        session: newSession,
+        favorites: newFavorites,
+      },
+      { new: true }
+    );
     res.locals.updatedUser = updatedUser;
     return next();
-  } catch(err){
+  } catch (err) {
     return next({
       log: `The following error occured: ${err}`,
       status: 400,
-      message: { err: 'An error occured while trying to update a user' }
+      message: { err: 'An error occured while trying to update a user' },
     });
   }
-}
-
+};
 
 dbController.deleteUser = async (req, res, next) => {
   const { name } = req.params;
-    try{
-      const deletedUser = await User.findOneAndDelete({firstName: name})
-      res.locals.deletedUser = deletedUser;
-      return next();
-    } catch(err){
-      return next({
-        log: `The following error occured: ${err}`,
-        status: 400,
-        message: { err: 'An error occured while trying to delete a user' }
-      });
-    }
-}
-
+  try {
+    const deletedUser = await User.findOneAndDelete({ firstName: name });
+    res.locals.deletedUser = deletedUser;
+    return next();
+  } catch (err) {
+    return next({
+      log: `The following error occured: ${err}`,
+      status: 400,
+      message: { err: 'An error occured while trying to delete a user' },
+    });
+  }
+};
 
 module.exports = dbController;
