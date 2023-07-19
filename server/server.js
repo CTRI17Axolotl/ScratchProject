@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 //Routes
 const userRouter = require('./routers/usersRouter.js');
-const artPieceRouter = require('./routers/piecesRouters.js');
+const artPieceRouter = require('./routers/piecesRouter.js');
 
 //require utils helper func for key
 const { generateSecretKey } = require('./utils/helpers.js');
