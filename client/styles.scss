@@ -1,3 +1,100 @@
 $ax-color: rgb(228, 35, 190);
 $st-color: rgba(97, 145, 215, 1);
+$container-bg-color: rgba(210, 210, 210, 0.3);
+$gray1: rgb(30, 30, 30);
+$gray2: rgb(70, 70, 70);
+$gray3: rgb(120, 120, 120);
+$fontpick: 'Trebuchet MS';
+$shadow1: rgba(0, 0, 0, 0.35) 0px 5px 12px;
+$shadow2: rgba(0, 0, 0, 0.55) 0px 5px 25px;
 
+.center-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery-container {
+  width: 95%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+  gap: 0.7rem, 0.7rem;
+}
+
+.piece-container {
+  // background-color: rgb(230, 230, 230);
+  background-color: $container-bg-color;
+  box-shadow: $shadow1;
+  width: 380px;
+  height: 520px;
+  margin: 10px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  .piece-image-container {
+    flex: 0 0 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .piece-image {
+      max-height: 350px;
+      width: auto;
+      max-width: 350px;
+    }
+  }
+  .piece-content {
+    height: 150px;
+    width: 330px;
+    background-color: rgba(228, 35, 190, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .piece-text {
+      padding: 10px;
+      width: 70%;
+      height: 110px;
+      display: flex;
+
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      p {
+        margin: 0px;
+        margin-left: 10px;
+        color: $gray2;
+        font-family: $fontpick;
+        font-weight: bolder;
+        font-size: larger;
+      }
+      :first-child {
+        font-size: x-large;
+        margin-left: 0px;
+        color: $gray1;
+      }
+    }
+    .piece-buttons {
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      img,
+      p {
+        margin: 5px;
+      }
+    }
+  }
+
+  .signin-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.piece-container:hover {
+  box-shadow: $shadow2;
+}

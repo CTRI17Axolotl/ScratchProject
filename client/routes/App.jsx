@@ -9,6 +9,7 @@ import {
 
 import Home from './Home.jsx';
 import User from './User.jsx';
+import SignIn from './SignIn.jsx';
 import '../styles.scss';
 
 const App = () => {
@@ -16,10 +17,8 @@ const App = () => {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/user/:userId"
-          element={<User />}
-        />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/user/:userId" element={<User />} />
       </Routes>
     </div>
   );
