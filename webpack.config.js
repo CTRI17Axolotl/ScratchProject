@@ -46,6 +46,7 @@ module.exports = {
   devServer: {
     host: '127.0.0.1',
     port: 8080, //Defines the port number on which the development server will run.
+    historyApiFallback: true,
     static: {
       directory: path.resolve(__dirname, '/dist'),
     },

@@ -7,8 +7,11 @@ import { Link, useNavigate } from 'react-router-dom';
 const SignIn = () => {
   const nav = useNavigate();
 
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [username, setUser] = useState('');
   const [password, setPassword] = useState('');
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const handleUserChange = (e) => {
     setUser(e.target.value);
@@ -18,17 +21,84 @@ const SignIn = () => {
     setPassword(e.target.value);
   };
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     event.preventDefault();
-    console.log(username);
-    console.log(password);
-    //perform authentication logic here with user database here!!
-    nav('/');
+    if(!isSignUp){
+      fetch('/users/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          username: username,
+          password: password
+        }),
+        headers: {
+          "Content-Type": 'application/json'
+        }
+      })
+      // response is a returned session?
+      .then(res => {
+        if(!res.ok){
+          throw new Error('Wrong username or password.');
+          //some logic to either say wrong username/password
+          //some additional logic regarding the response (session/token?)
+          //perform authentication logic here with user database here!!
+        } else {
+          nav('/');
+        }
+      })
+      .catch(err => {
+        throw new Error('Error occurred in post request to log in user ', err);
+      });
+    } else {
+        fetch('/users/create', {
+          method: 'POST',
+          body: JSON.stringify({
+            email: email,
+            name: name,
+            username: username,
+            password: password
+          }),
+          headers: {
+            "Content-Type": 'application/json'
+          }
+          })
+        .then(res => {
+          if(!res.ok){
+            throw new Error('Wrong username or password.');
+            //some logic to either say wrong username/password
+            //OR a change in the route to change it into a sign up page
+          } else {
+             //some additional logic regarding the response (session/token?)
+             //perform authentication logic here with user database here!!
+            nav('/');
+          }
+        })
+        .catch(err => {
+          throw new Error('Error occurred post request to create user ', err);
+        });
+    }
   };
 
 //use inputValue to fetch for user database
   return (
     <div className = "signin-container">
+      {isSignUp && (<div>
+        <label htmlFor="email">Email:</label>
+         <input type="text" id='email' value = {email} onChange = {handleEmailChange}/>
+      </div>
+      )}
+      {isSignUp&& (<div>
+        <label htmlFor="name">Display Name:</label>
+         <input type="text" id='name' value = {name} onChange = {handleNameChange}/>
+      </div>
+      )}
       <div>
         <label htmlFor="username">Username:</label>
          <input type="text" id='username' value = {username} onChange = {handleUserChange}/>
@@ -37,9 +107,13 @@ const SignIn = () => {
         <label htmlFor="password">Password:</label>
         <input type="text" id='password' value = {password} onChange = {handlePwChange}/>
       </div>
-      <button onClick={handleSubmit}>Sign In!</button>
+      <button className = "button" onClick={handleSubmit}>{isSignUp ? 'Sign Up!' : 'Sign In!'}</button>
+      {!isSignUp && (<p>
+        Don't have an account? 
+        <button className = "button" onClick = {() => setIsSignUp(true)}>Sign Up Here</button>
+      </p>
+      )}   
     </div>
   )
 }
-
 export default SignIn;

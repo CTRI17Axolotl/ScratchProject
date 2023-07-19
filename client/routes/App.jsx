@@ -15,11 +15,13 @@ import '../styles.scss';
 const App = () => {
   return (
     <div>
+      {/* <FileContext.Provider value={store}> */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/user/:userId" element={<User />} />
       </Routes>
+      {/* </FileContext.Provider > */}
     </div>
   );
 };

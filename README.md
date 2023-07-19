@@ -1,8 +1,18 @@
-## Database
-## Database
+## Front -> Express Routes List
+GET /pieces -- send art as array of objects
+POST /pieces -- receive new art piece: {title, image, artist, description, ownerId, forSale, price, collection, sizeL, sizeW, sizeH}. Authenticate, Calculate sizeClass and priceClass, create new listing (which generates pieceId), and send newly updated array of all pieces. 
+PUT /pieces/:pieceId -- receive updatable fields {description, forSale, price}, Authenticate, calculate priceClass, update the req.params.pieceId piece in the db, and send newly updated array of all pieces.
+
+GET /users -- send array of *some* data for all users -- userId, name, email, and favorites   
+POST /users/login -- receive username, password -- verify user, return session 
+POST /users/create -- receive username, password, name, email -- create user if valid, return session
+~~POST /users/logout -- destroy session (is this necessary?)~~
+PUT /users/updateFaves -- receive array of pieceId, authenticate, update that user's favorites, return updated array for all users (see GET /users)
+
 
 ### Users
 - userId - number /autogen
+- username - string
 - name - string 
 - password - (Hashed + Salt) - string
 - session  - 
@@ -10,7 +20,7 @@
 - favorites -  of Favorites [UniqueId, UniqueId, ... ] - array of Unique Ids
 
 ### Pieces
-- itemId - Unique ID - ID-  autogen? 
+- pieceId - Unique ID - ID-  autogen? 
 - image  - url / string ??
 - title - String
 - artist - String
@@ -20,23 +30,13 @@
 - price - Num
 - collection - (Realism / Modernism / Classicism / Photography / Sculpture) 
 - sizeClass - Int 0/1/2
+- priceClass - Int 0/1/2
 - sizeL - Num
 - sizeW - Num
 - sizeH - Num
 
 
-## Original Backend Express Routes
---ITEMS--
-POST /items {itemName, artist, description, price}
-GET /items -- get all
-PATCH /items + {itemName, newDescription, newPrice} -- search for name, update description + price
-DELETE /items + {itemName} 
 
---USERS--
-POST /users/ + body {firstName, lastName, email, address} -- pst
-GET /users/FIRSTNAME -- search db for first name
-PATCH /users/FIRSTNAME + body {newEmail, newAddress} -- update 
-DELETE /users/FIRSTNAME -- delete
 ## Original Backend Express Routes
 --ITEMS--
 POST /items {itemName, artist, description, price}
@@ -162,11 +162,18 @@ GET /items -- get and return all items
 
 
 
+## Original Backend Express Routes
+--ITEMS--
+POST /items {itemName, artist, description, price}
+GET /items -- get all
+PATCH /items + {itemName, newDescription, newPrice} -- search for name, update description + price
+DELETE /items + {itemName} 
 
-
-
-
-
+--USERS--
+POST /users/ + body {firstName, lastName, email, address} -- pst
+GET /users/FIRSTNAME -- search db for first name
+PATCH /users/FIRSTNAME + body {newEmail, newAddress} -- update 
+DELETE /users/FIRSTNAME -- delete
 
 
 Original Group: KYLE, WES, MIKE, WADE
