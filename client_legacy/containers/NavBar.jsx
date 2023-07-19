@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Stack, AppBar, Toolbar, Typography } from '@mui/material';
+import UploadWidget from '../components/UploadWidget.jsx';
 
 const NavBar = () => {
+
   useEffect(() => {
     //use effect so initial click triggers handleclick
     const userSubmissionForm = document.getElementById('userSubmissionForm');
@@ -66,34 +68,23 @@ const NavBar = () => {
     }
   };
 
-  // const handleUpdateClick = () => {
-  //   console.log('handleUpdateClick invoked');
-  //   const userSubmissionForm = document.getElementById('userSubmissionForm');
-  //   userSubmissionForm.style.display = 'block'; //displays form
-  //   const formInfo = e.target.value; // stores form submission into form info
-  //   console.log('formInfo: ', formInfo);
-  //   e.preventDefault();
-  // };
-
-  // const handleDeleteClick = () => {
-  //   console.log('handleDeleteClick invoked');
-  //   const userSubmissionForm = document.getElementById('userSubmissionForm');
-  //   userSubmissionForm.style.display = 'block'; //displays form
-  //   const formInfo = e.target.value; // stores form submission into form info
-  //   console.log('formInfo: ', formInfo);
-  //   e.preventDefault();
-  // };
 
   const submitClickHandler = (e) => {
     console.log('submit clicked');
     console.log(lastButtonClicked);
     e.preventDefault();
     // if the lastButtonClicked was post
+
+      //successful during testing
     if (lastButtonClicked === 'CREATE ART') {
       console.log('CREATE ART is working');
       console.log('e: ', e);
       console.log('e.target: ', e.target);
       console.log('e.target.value: ', e.target.value);
+      //submit button clears browser console unable to check e.target.value 
+        //e= submit button event
+        //target=the submit button
+        //value= non-existent currently
       const body = {
         itemName: e.target[0].value,
         price: e.target[1].value,
@@ -122,16 +113,28 @@ const NavBar = () => {
     }
 
     // if the lastButtonClicked was update
+    //successful during testing 
     if (lastButtonClicked === 'UPDATE ART') {
       console.log('UPDATE ART is working');
+      //prevents page reloading after button clicked and ensures JS functionality to handle the resetting of the page
       e.preventDefault();
+      //body of the form to be included in the ajax request body
+
+      //Same as Create Art no e.target.value
+        //consider testing submit request button without e.preventDefault() to see body object defined below in browser console
       const body = {
         itemName: e.target[0].value,
         newPrice: e.target[1].value,
         newDescription: e.target[3].value,
       };
+
       const form = document.getElementById('userSubmissionForm'); // resets the form values to empty after submission
+
+      //consider testing without form.reset()
+        //seems to be working but unable to tell if the body variable functionality is implemented 
       form.reset();
+
+
       fetch('/items', {
         method: 'PATCH',
         headers: {
@@ -147,6 +150,9 @@ const NavBar = () => {
         .then(() => location.reload()) // forces page reload to render update
         .catch((err) => console.log('error when updating new data', err));
     }
+
+
+    
     // if the lastButtonClicked as delete
     if (lastButtonClicked === 'DELETE ART') {
       console.log('Delete ART is working');
@@ -185,6 +191,7 @@ const NavBar = () => {
       <button id="deleteArtButton" onClick={handleNavBarClick}>
         DELETE ART
       </button>
+      <UploadWidget/>
 
       <form id="userSubmissionForm" onSubmit={submitClickHandler}>
         <div>
