@@ -39,7 +39,8 @@ button {
 .buyItemButton,
 #createArtButton,
 #deleteArtButton,
-#updateArtButton {
+#updateArtButton,
+#uploadImage {
   padding: 0.5em;
   margin-left: 0.4rem;
   border-radius: 10px;
@@ -49,7 +50,8 @@ button {
 
 #createArtButton,
 #deleteArtButton,
-#updateArtButton {
+#updateArtButton,
+#uploadImage {
   background-color: rgb(255, 227, 225);
 }
 
@@ -58,7 +60,8 @@ button {
 .buyItemButton:hover,
 #createArtButton:hover,
 #deleteArtButton:hover,
-#updateArtButton:hover {
+#updateArtButton:hover,
+#uploadImage:hover {
   cursor: pointer;
   background-color: rgb(154, 25, 128);
   color: white;
@@ -79,6 +82,8 @@ button {
 }
 
 #navBar {
+  display: flex;
+  justify-content: center;
   background-color: pink;
   margin-bottom: 1em;
   padding-top: 1em;
