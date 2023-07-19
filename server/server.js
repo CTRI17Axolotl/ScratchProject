@@ -20,7 +20,6 @@ app.use(express.json());
 
 
 app.use('/users', userRouter);
-
 app.use('/items', itemRouter)
 
 

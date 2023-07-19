@@ -8,11 +8,13 @@ const Item = new Schema({
   // artist
   artist: { type: String, required: true },
   // link
-  image: { type: String, data: Buffer, required: false },
+  image: { type: Buffer, required: false },
   // description
   description: { type: String, required: false },
   // price
-  price: { type: Number, required: true }
+  price: { type: Number, required: true },
+  seller: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  buyer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
 
