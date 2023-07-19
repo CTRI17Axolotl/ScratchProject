@@ -15,17 +15,17 @@ const Piece = ({ pieceData }) => {
       <div className="piece-content">
         <div className="piece-text">
           <p>{pieceData.title}</p>
-          <p>{pieceData.artist}</p>
-          <p>{pieceData.forSale ? pieceData.price : 'Not for Sale'}</p>
-          <p>
+          <p>{'by '+pieceData.artist}</p>
+          <p>{pieceData.forSale ? 'Price: $'+pieceData.price : 'Not for Sale'}</p>
+          {/* <p>
             {pieceData.forSale
               ? 'For Sale by ' + pieceData.ownerId
               : 'List by ' + pieceData.ownerId}
-          </p>
+          </p> */}
         </div>
         <div className="piece-buttons">
           {pieceData.isFave ? <p>"❤️"</p> : <p>"🖤"</p>}
-          {pieceData.isOwner ? <p>Edit</p> : <p></p>}
+          {pieceData.isOwner ? <p>Edit</p> : <p>--</p>}
         </div>
       </div>
     </motion.div>

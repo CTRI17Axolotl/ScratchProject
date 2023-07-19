@@ -8,8 +8,8 @@ const App = () => {
   const nav = useNavigate();
 
   return (
-    <div>
-      <h1>Hello World</h1>
+    <div className="base-container">
+      <h1>Stork Art Fair</h1>
       <Gallery pieceList={fakeData.data}></Gallery>
       <Link to={'user/17'} state={{ test: '45' }}>
         User 17
