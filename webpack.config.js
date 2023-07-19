@@ -15,7 +15,7 @@ module.exports = {
   mode: 'development',
   plugins: [
     new HtmlWebpackPlugin({
-      template: '/index.html',
+      template: './client/index.html',
     }),
     new webpack.DefinePlugin({
       'process.env': dotenv.parsed,
@@ -52,7 +52,7 @@ module.exports = {
     proxy: {
       publicPath: '/build',
       '/users/*': 'http://localhost:3000',
-      '/items/*': 'http://localhost:3000'
+      '/items/*': 'http://localhost:3000',
       //   '/': {
       //     target: 'http://localhost:8080',
       //     secure: false,
