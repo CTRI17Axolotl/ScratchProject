@@ -8,9 +8,12 @@ const UploadWidget = () => {
     cloudinaryRef.current = window.cloudinary;
     widgetRef.current = cloudinaryRef.current.createUploadWidget({
       cloudName: 'dbinuhocd',
-      uploadPreset: 'xqfxb9ga'
+      uploadPreset: 'xqfxb9ga',
+      sources: ['local', 'url'],
     }, function(error, result) {
-      console.log(result);
+      console.log('result: ', result);
+      console.log('result.info.secure_url: ', result.info.secure_url);
+      
     });
   }, [])
 
