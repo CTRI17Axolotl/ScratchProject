@@ -1,11 +1,25 @@
+//Typical BoilerPlate w/cookies
 const express = require('express');
 const path = require('path');
 const app = express();
+const cookieParser = require('cookie-parser');
+const PORT = process.env.PORT || 3000;
+
+//Routes
 const userRouter = require('./routers/userRouter.js');
 const artPieceRouter = require('./routers/artPieceRouter.js');
-const PORT = process.env.PORT || 3000;
+
+//require utils helper func for key
+const { generateSecretKey } = require('./utils/helpers.js');
+
+const secretKey = generateSecretKey();
+
+//require mongoose
 const mongoose = require('mongoose');
-const dotenv = require('dotenv').config(); // required to use process.env.access_key
+
+// const dotenv = require('dotenv').config(); // required to use process.env.access_key
+
+//connect to the database
 mongoose.connect(
   'mongodb+srv://aderritt6158:qjxKqRlDpUZ9ZStC@cluster0.rti6q70.mongodb.net/sandbox?retryWrites=true&w=majority',
   { useNewUrlParser: true, useUnifiedTopology: true }
@@ -14,11 +28,20 @@ mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
 
-app.use(express.urlencoded({ extended: true }));
+//json parser and urlencoded
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//cookie parser
+app.use(cookieParser());
 
 app.use('/users', userRouter);
 app.use('/items', artPieceRouter);
+
+//serve static files
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src', 'index.html'));
+});
 
 // Unknown route handler
 app.use((req, res) => res.sendStatus(404));

@@ -1,16 +1,22 @@
 const ArtPiece = require('../dbModel/artPieceModel');
+const jwt = require('jsonwebtoken');
+const { generateSecretKey } = require('../utils/helpers');
 
 const artPieceController = {};
 
+const secretKey = generateSecretKey();
 // GET: display the listings of art
 // POST: create a new listing
 // PATCH: update a listing
 // DELETE: delete a listing
+const verifyToken = (token) => {
+  return jwt.verify(token, secretKey);
+};
 
 artPieceController.getArt = async (req, res, next) => {
   try {
-    console.log('entered getItem method in itemController');
-    const piece = await ArtPiece.find({});
+    console.log('entered getArt method in artPieceController');
+    const piece = await ArtPiece.find({ title: title });
     res.locals.foundArt = piece;
     return next();
   } catch (err) {
@@ -47,6 +53,10 @@ artPieceController.createArt = async (req, res, next) => {
   } = req.body;
 
   try {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = verifyToken(token);
+    const userId = decodedToken.userId;
+
     const newArt = await ArtPiece.create({
       artist,
       genre,
@@ -54,7 +64,7 @@ artPieceController.createArt = async (req, res, next) => {
       dimensions,
       title,
       image,
-      owner,
+      owner: userId,
       buyer,
       seller,
       forSale,
@@ -91,6 +101,11 @@ artPieceController.updateArt = async (req, res, next) => {
       newForSale,
       newStyle,
     } = req.body;
+
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = verifyToken(token);
+    const userId = decodedToken.userId;
+
     const updatedArt = await ArtPiece.findOneAndUpdate(
       { title: newTitle },
       {
@@ -124,7 +139,15 @@ artPieceController.deleteArt = async (req, res, next) => {
   // const { name } = req.params;
   try {
     const { title } = req.body;
-    const deletedArt = await ArtPiece.findOneAndDelete({ title: title });
+
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = verifyToken(token);
+    const userId = decodedToken.userId;
+
+    const deletedArt = await ArtPiece.findOneAndDelete({
+      title: title,
+      owner: userId,
+    });
     res.locals.deletedArt = deletedArt;
     return next();
   } catch (err) {

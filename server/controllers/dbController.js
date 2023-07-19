@@ -1,6 +1,14 @@
 const User = require('../dbModel/userModel');
+const jwt = require('jsonwebtoken');
+const { generateSecretKey } = require('../utils/helpers');
 
 const dbController = {};
+
+const secretKey = generateSecretKey();
+
+const verifyToken = (token) => {
+  return jwt.verify(token, secretKey);
+};
 
 // GET: display the listings of art
 // POST: create a new listing
@@ -40,12 +48,16 @@ dbController.createUser = async (req, res, next) => {
   // }
 
   try {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = verifyToken(token);
+    const userId = decodedToken.userId;
+
     const newUser = await User.create({
       name,
       email,
       address,
       password,
-      username,
+      username: userId,
       session,
       favorites,
     });
@@ -71,6 +83,11 @@ dbController.updateUser = async (req, res, next) => {
       newSession,
       newFavorites,
     } = req.body;
+
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = verifyToken(token);
+    const userId = decodedToken.userId;
+
     const updatedUser = await User.findOneAndUpdate(
       { firstName: name },
       {
@@ -97,7 +114,14 @@ dbController.updateUser = async (req, res, next) => {
 dbController.deleteUser = async (req, res, next) => {
   const { name } = req.params;
   try {
-    const deletedUser = await User.findOneAndDelete({ firstName: name });
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = verifyToken(token);
+    const userId = decodedToken.userId;
+
+    const deletedUser = await User.findOneAndDelete({
+      firstName: name,
+      username: userId,
+    });
     res.locals.deletedUser = deletedUser;
     return next();
   } catch (err) {
