@@ -7,6 +7,8 @@ $gray3: rgb(120, 120, 120);
 $fontpick: 'Trebuchet MS';
 $shadow1: rgba(0, 0, 0, 0.35) 0px 5px 12px;
 $shadow2: rgba(0, 0, 0, 0.55) 0px 5px 25px;
+$btnrad: 70px;
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css');
 
 .center-container {
   display: flex;
@@ -24,7 +26,37 @@ h1 {
   font-size: 80px;
   margin: 30px;
 }
-
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.btn {
+  margin: 25px;
+  width: $btnrad;
+  height: $btnrad;
+  border-radius: $btnrad;
+  border-style: none;
+  background-color: $st-color;
+  box-shadow: $shadow1;
+  transition: 0.4s;
+  font-size: 30px;
+  color: white;
+}
+.btn:hover {
+  background-color: lighten($st-color, 10%);
+  box-shadow: $shadow2;
+}
+.add-piece {
+}
+.sign-in {
+}
+.placeholder {
+  margin: 20px;
+  height: $btnrad;
+  min-width: $btnrad;
+  opacity: 0;
+}
 .gallery-container {
   width: 98%;
   display: grid;
@@ -95,12 +127,31 @@ h1 {
       margin: 10px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       height: 80px;
       img,
       p {
         margin: 5px;
+      }
+      .content-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        border: none;
+        background-color: lighten($st-color, 10%);
+        box-shadow: $shadow1;
+        transition: 0.4s;
+        .i {
+          font-size: 22px;
+        }
+      }
+      .content-btn:hover {
+        background-color: lighten($st-color, 18%);
+        box-shadow: $shadow2;
+      }
+      .content-btn:focus {
+        // background-color: red;
       }
     }
   }

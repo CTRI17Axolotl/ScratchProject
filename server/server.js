@@ -85,11 +85,11 @@ app.get('/', cookieController.setCookie, (req, res) => {
 
 //Authorized Routes below
 app.use('/users', usersRouter);
-app.use('/pieces', piecesRouter);
+app.use('/pieces', artPieceRouter);
 
 //serve static files
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'src', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
 
 // Unknown route handler

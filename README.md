@@ -1,14 +1,14 @@
 ## Front -> Express Routes List
 
 GET /pieces -- send art as array of objects
-POST /pieces -- receive new art piece: {title, image, artist, description, ownerId, forSale, price, style, sizeL, sizeW, sizeH}. Authenticate, Calculate sizeClass and priceClass, create new listing (which generates pieceId), and send newly updated array of all pieces.
+POST /pieces -- receive new art piece: {title, image, artist, description, ownerId, forSale, price, style, sizClass}. Authenticate, Calculate priceClass, create new listing (which generates pieceId), and send newly updated array of all pieces.
 PUT /pieces/:pieceId -- receive updatable fields {description, forSale, price}, Authenticate, calculate priceClass, update the req.params.pieceId piece in the db, and send newly updated array of all pieces.
 
 GET /users -- send array of _some_ data for all users -- userId, name, email, and favorites  
 POST /users/login -- receive username, password -- verify user, return session
 POST /users/create -- receive username, password, name, email -- create user if valid, return session
 ~~POST /users/logout -- destroy session (is this necessary?)~~
-PUT /users/updateFaves -- receive array of pieceId, authenticate, update that user's favorites, return updated array for all users (see GET /users)
+PUT /users/updateFaves -- receive array of pieceId 's, authenticate, update that user's favorites, return updated array for all users (see GET /users)
 
 ### Users
 
@@ -22,8 +22,7 @@ PUT /users/updateFaves -- receive array of pieceId, authenticate, update that us
 
 ### Pieces
 
-<!-- - pieceId - Unique ID - ID-  autogen?  -->
-
+- pieceId - Unique ID - ID- autogen?
 - image - url / string ??
 - title - String
 - artist - String
