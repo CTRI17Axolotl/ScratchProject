@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Gallery from '../components/Gallery.jsx';
 import FilterButtons from '../components/FilterButtons.jsx';
 import { StoreContext } from './dataStore.js';
+import backgrounds from '../components/Backgrounds.js';
 
 // import fakeData from '../components/Placeholder.jsx';
 
@@ -22,6 +23,10 @@ const Home = () => {
     setPallet,
     numberOfPallets,
   } = useContext(StoreContext); // destructure dataStore vars for use
+
+  useEffect(() => {
+    document.body.style.backgroundImage = `url('${backgrounds.home[pallet]}')`;
+  }, [pallet]);
 
   useEffect(() => {
     if (true) {

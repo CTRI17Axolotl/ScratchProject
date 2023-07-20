@@ -1,10 +1,11 @@
 // Imports
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StoreContext } from './dataStore';
 import { Link, useNavigate } from 'react-router-dom';
 import Gallery from '../components/Gallery.jsx';
 import fakeData from '../components/Placeholder.jsx';
 import UploadWidget from '../components/UploadWidget.jsx';
+import backgrounds from '../components/Backgrounds.js';
 
 export default function AddPiece(props) {
   const emptyForm = {
@@ -20,15 +21,17 @@ export default function AddPiece(props) {
   };
 
   const [formData, setFormData] = useState(emptyForm);
+  const nav = useNavigate();
+  const { activeUser, updateFullPieceList, pallet } = useContext(StoreContext);
 
-  const { activeUser, updateFullPieceList } = useContext(StoreContext);
+  useEffect(() => {
+    document.body.style.backgroundImage = `url('${backgrounds.addPiece[pallet]}')`;
+  }, [pallet]);
 
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   }
-
-  const nav = useNavigate();
 
   function setURL(url) {
     if (url) {
