@@ -33,18 +33,16 @@ piecesController.getArt = async (req, res, next) => {
 
 piecesController.createArt = async (req, res, next) => {
   // console.log('req: ', req.body);
+  
   try {
     console.log(req.body);
     const {
       artist,
       title,
       description,
-      image,
-      ownerId,
-      forSale,
-      price,
-      priceClass,
       style,
+      image,
+      price,
       sizeClass,
     } = req.body;
 
