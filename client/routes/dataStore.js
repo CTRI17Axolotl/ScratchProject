@@ -22,6 +22,8 @@ export default ({ children }) => {
     setFullPieceList(list);
     updateFilteredList(list);
   };
+  const [pallet, setPallet] = useState(0);
+  const numberOfPallets = 4;
 
   const updateFilteredList = (list = fullPieceList) => {
     // console.log('filtering with list: ', list);
@@ -97,6 +99,9 @@ export default ({ children }) => {
     setUserList: setUserList,
     activeUser: activeUser,
     setActiveUser: setActiveUser,
+    pallet: pallet,
+    setPallet: setPallet,
+    numberOfPallets: numberOfPallets,
   };
 
   return (
