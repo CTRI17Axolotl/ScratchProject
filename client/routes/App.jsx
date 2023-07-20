@@ -16,7 +16,7 @@ import AddPiece from './AddPiece.jsx';
 
 const App = () => {
   return (
-    <div>
+    <div id="app-container" className="pallet0">
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />

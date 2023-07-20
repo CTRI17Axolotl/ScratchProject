@@ -18,6 +18,9 @@ const Home = () => {
     setCurrentFilters,
     activeUser,
     setUserList,
+    pallet,
+    setPallet,
+    numberOfPallets,
   } = useContext(StoreContext); // destructure dataStore vars for use
 
   useEffect(() => {
@@ -70,10 +73,30 @@ const Home = () => {
     updateFilteredList();
   }, [fullPieceList, currentFilters]);
 
+  const nextPallet = () => {
+    const newPallet = pallet > numberOfPallets - 2 ? 0 : pallet + 1;
+    setPallet(newPallet);
+  };
+
+  useEffect(() => {
+    const appContainer = document.getElementById('app-container');
+    for (let i = 0; i < numberOfPallets; i++) {
+      appContainer.classList.remove('pallet' + i);
+    }
+    appContainer.classList.add('pallet' + pallet);
+    console.log('Current clases: ', appContainer.classList);
+  }, [pallet]);
+
   return (
     <div className="base-container">
       <div className="header-container">
-        <div className="placeholder">{}</div>
+        <button
+          className="btn pallet"
+          title="Change Pallet"
+          onClick={() => nextPallet()}
+        >
+          <i className="bi bi-palette-fill" />
+        </button>
         <h1>Stork Art Fair</h1>
         <div>
           {activeUser ? (
@@ -95,58 +118,15 @@ const Home = () => {
           )}
         </div>
       </div>
-      <div style={{ textAlign: 'center' }}>
+      {/* <div style={{ textAlign: 'center' }}>
         <span>
-          <button onClick={() => nav('signin')}>Sign In</button>
+          <button onClick={() => nextPallet()}>Next Pallet</button>
         </span>
         <span>
           <button onClick={() => nav('addPiece')}>Add Piece</button>
         </span>
-      </div>
-      <div style={{ textAlign: 'center' }}>
-        <span>
-          <button
-            onClick={() =>
-              setCurrentFilters([
-                [false, false, false],
-                [false, false, true],
-                [false, false, false, false, false],
-                [false],
-              ])
-            }
-          >
-            Big
-          </button>
-        </span>
-        <span>
-          <button
-            onClick={() =>
-              setCurrentFilters([
-                [false, false, false],
-                [false, true, false],
-                [false, false, false, false, false],
-                [false],
-              ])
-            }
-          >
-            Smol
-          </button>
-        </span>
-        <span>
-          <button
-            onClick={() =>
-              setCurrentFilters([
-                [false, false, false],
-                [false, false, false],
-                [false, false, false, false, false],
-                [false],
-              ])
-            }
-          >
-            All
-          </button>
-        </span>
-      </div>
+      </div> */}
+
       <FilterButtons key={'filt' + currentFilters} />
       <Gallery
         pieceList={filteredPieceList}
