@@ -37,7 +37,7 @@ usersController.createUser = async (req, res, next) => {
 
   // console log the received response from the database
   try {
-    const { name, email, address, password, session, favorites } = req.body;
+    const { name, email, username, password } = req.body;
     console.log(req.body);
 
     // if(!firstName || !lastName || !age){
@@ -48,19 +48,16 @@ usersController.createUser = async (req, res, next) => {
     //   });
     // }
 
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = verifyToken(token);
-    const userId = decodedToken.userId;
+    // const token = req.headers.authorization.split(' ')[1];
+    // const decodedToken = verifyToken(token);
+    // const userId = decodedToken.userId;
 
     const newUser = await User.create({
       //userId
       name: name,
       email: email,
-      address: address,
       password: password,
       username: username,
-      favorites: favorites,
-      session: session,
     });
     res.locals.newUser = newUser;
     return next();

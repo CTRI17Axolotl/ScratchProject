@@ -155,18 +155,22 @@ h1 {
       }
     }
   }
-
-  .signin-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 }
+
 .piece-container:hover {
   background-color: $container-bg-color;
   box-shadow: $shadow1;
   .piece-content {
     opacity: 1;
+  }
+}
+
+.signin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .signin-textbox {
+    display: flex;
   }
 }

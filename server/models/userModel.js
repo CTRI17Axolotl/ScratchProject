@@ -15,11 +15,11 @@ const User = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true },
-    address: { type: String, required: true },
+    address: { type: String, required: false },
     username: { type: String, required: true },
     password: { type: String, required: true },
     session: { type: String, required: false },
-    favorites: { type: Array, required: true },
+    favorites: { type: Array, required: false },
   },
   { collection: 'Users' }
 );
