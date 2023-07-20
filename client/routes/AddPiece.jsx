@@ -6,7 +6,7 @@ import Gallery from '../components/Gallery.jsx';
 import fakeData from '../components/Placeholder.jsx';
 import UploadWidget from '../components/UploadWidget.jsx';
 
-function AddPiece() {
+export default function AddPiece(props) {
   const emptyForm = {
     ownerId: '',
     artist: '',
@@ -30,6 +30,11 @@ function AddPiece() {
   }
 
   // const nav = useNavigate();
+
+  let imageURL;
+  function setURL(url) {
+    imageURL = url;
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -66,24 +71,22 @@ function AddPiece() {
             style: formData.style,
             image: imageURL,
             price: formData.price,
-            sizeClass: formData.size,
-            forSale: formData.sale,
+            sizeClass: formData.sizeClass,
+            forSale: formData.forSale,
           }),
         });
+
         setFormData(emptyForm);
       } catch (err) {
         console.log(err);
       }
     }
-    addNewPiece();
-  }
 
-  let imageURL;
-  function setURL(url) {
-    if (url) {
+    let imageURL;
+    function setURL(url) {
       imageURL = url;
-      console.log('received url' + url);
     }
+    addNewPiece();
   }
 
   console.log('imageURL: ', imageURL);
@@ -181,9 +184,9 @@ function AddPiece() {
             <input
               list="sizing"
               type="text"
-              id="size"
-              name="size"
-              value={formData.size}
+              id="sizeClass"
+              name="sizeClass"
+              value={formData.sizeClass}
               onChange={handleChange}
               placeholder="Size Value"
             ></input>
@@ -198,15 +201,15 @@ function AddPiece() {
               <h3>Is Art Piece for Sale?</h3>
             </label>
             <input
-              list="forSale"
+              list="sale"
               type="text"
-              id="sale"
-              name="sale"
-              value={formData.sale}
+              id="forSale"
+              name="forSale"
+              value={formData.forSale}
               onChange={handleChange}
               placeholder="On the Market?"
             ></input>
-            <datalist id="forSale">
+            <datalist id="sale">
               <option>true</option>
               <option>false</option>
             </datalist>
@@ -217,5 +220,3 @@ function AddPiece() {
     </div>
   );
 }
-
-export default AddPiece;
