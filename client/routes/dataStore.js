@@ -17,7 +17,7 @@ export default ({ children }) => {
   // filter price, size, collection, faved
   const [currentPieceFocus, setCurrentPieceFocus] = useState(false); // focus.pc
   const [userList, setUserList] = useState([]); // user list
-  const [activeUser, setActiveUser] = useState(); // logged in userfalse
+  const [activeUser, setActiveUser] = useState(7); // logged in userfalse
   const updateFullPieceList = (list) => {
     setFullPieceList(list);
     updateFilteredList(list);

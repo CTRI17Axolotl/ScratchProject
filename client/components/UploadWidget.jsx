@@ -13,11 +13,10 @@ const UploadWidget = ({ setURL }) => {
         sources: ['local', 'url'],
       },
       function (error, result) {
-        if (!error && result && result.event === "success") {
+        if (!error && result && result.event === 'success') {
           setURL(result.info.secure_url);
           console.log('result.info.secure_url: ', result.info.secure_url);
         }
-        
       }
     );
   }, []);

@@ -40,7 +40,7 @@ const Piece = ({ pieceData }) => {
               onClick={clickHandler}
               id={'l' + pieceData.pieceId}
             >
-              <i class="bi bi-heart-fill" id={'m' + pieceData.pieceId}></i>
+              <i className="bi bi-heart-fill" id={'m' + pieceData.pieceId}></i>
             </button>
           ) : (
             <button
@@ -48,7 +48,7 @@ const Piece = ({ pieceData }) => {
               onClick={clickHandler}
               id={'u' + pieceData.pieceId}
             >
-              <i class="bi bi-heart" id={'v' + pieceData.pieceId} onClick={clickHandler}></i>
+              <i className="bi bi-heart" id={'v' + pieceData.pieceId} onClick={clickHandler}></i>
             </button>
           )}
           {pieceData.isOwner ? (
@@ -57,7 +57,7 @@ const Piece = ({ pieceData }) => {
               onClick={clickHandler}
               id={'e' + pieceData.pieceId}
             >
-              <i class="bi bi-pencil-square" id={'f' + pieceData.pieceId}></i>
+              <i className="bi bi-pencil-square" id={'f' + pieceData.pieceId}></i>
             </button>
           ) : (
             <></>

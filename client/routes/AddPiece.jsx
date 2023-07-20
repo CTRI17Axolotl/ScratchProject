@@ -47,6 +47,20 @@ export default function AddPiece(props) {
     //^ Get data submitted with Form fields
 
     async function addNewPiece() {
+      console.log(
+        'Here post' +
+          {
+            ownerId: activeUser,
+            artist: formData.artist,
+            title: formData.title,
+            description: formData.description,
+            style: formData.style,
+            image: imageURL,
+            price: formData.price,
+            sizeClass: formData.size,
+            forSale: formData.sale,
+          }
+      );
       try {
         //^ Check if input fields are empty and return an error
         const response = await fetch('/pieces', {
@@ -77,6 +91,8 @@ export default function AddPiece(props) {
     addNewPiece();
   }
 
+
+
   console.log('imageURL: ', imageURL);
   // updateFullPieceList (  pieceListParsedFromServerBackend);
 
@@ -84,6 +100,11 @@ export default function AddPiece(props) {
     <div className="form-container">
       <div className="form-contents">
         <h2>Upload a New Piece</h2>
+        <hr />
+        <br />
+        <UploadWidget setURL={setURL} />
+        <br />
+        <br />
         <hr />
         <br />
         <UploadWidget setURL={setURL} />
@@ -131,6 +152,15 @@ export default function AddPiece(props) {
               onChange={handleChange}
               placeholder="Enter description here..."
             ></textarea>
+              type="text"
+              id="description"
+              name="description"
+              rows="5"
+              cols="16"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Enter description here..."
+            ></textarea>
           </div>
           <div>
             <label htmlFor="title">
@@ -144,6 +174,7 @@ export default function AddPiece(props) {
               onChange={handleChange}
               placeholder="Art Style Category"
             ></input>
+            <datalist id="category">
             <datalist id="category">
               <option>Realism</option>
               <option>Classicism</option>
@@ -179,6 +210,7 @@ export default function AddPiece(props) {
               placeholder="Size Value"
             ></input>
             <datalist id="sizing">
+            <datalist id="sizing">
               <option>Small &nbsp; &nbsp; - up to 2' x 2'</option>
               <option>Medium - up to 4' x 4'</option>
               <option>Large &nbsp; &nbsp; - over 4' x 4'</option>
@@ -198,8 +230,10 @@ export default function AddPiece(props) {
               placeholder="On the Market?"
             ></input>
             <datalist id="sale">
+            <datalist id="sale">
               <option>true</option>
               <option>false</option>
+            </datalist>
             </datalist>
           </div>
           <button className="addPieceSubmit">Submit</button>
@@ -211,3 +245,4 @@ export default function AddPiece(props) {
     </div>
   );
 }
+
