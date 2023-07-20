@@ -50,6 +50,9 @@ const SignIn = () => {
             //some additional logic regarding the response (session/token?)
             //perform authentication logic here with user database here!!
           } else {
+            const data = res.json();
+            const { setActiveUser } = useContext(StoreContext);
+            setActiveUser(data);
             nav('/');
           }
         })
@@ -81,7 +84,7 @@ const SignIn = () => {
             const data = res.json()
             //some additional logic regarding the response (session/token?)
             //perform authentication logic here with user database here!!
-            nav('/');
+            nav('/signin');
           }
         })
         .catch((err) => {

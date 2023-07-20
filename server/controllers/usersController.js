@@ -17,9 +17,9 @@ const verifyToken = (token) => {
 
 usersController.getUser = async (req, res, next) => {
   try {
-    console.log(req.params);
-    const { name } = req.params;
-    const user = await User.find({ firstName: name });
+    // console.log(req.params);
+    const { username, password } = req.body;
+    const user = await User.findOne({ username: username, password: password });
     res.locals.foundUser = user;
     return next();
   } catch (err) {
@@ -39,19 +39,9 @@ usersController.createUser = async (req, res, next) => {
   try {
     const { name, email, username, password } = req.body;
     console.log(req.body);
-
-    // if(!firstName || !lastName || !age){
-    //   return next({
-    //     log: `The following error occured: missing property`,
-    //     status: 400,
-    //     message: { err: 'An error occured while trying to create a user' }
-    //   });
-    // }
-
     // const token = req.headers.authorization.split(' ')[1];
     // const decodedToken = verifyToken(token);
     // const userId = decodedToken.userId;
-
     const newUser = await User.create({
       //userId
       name: name,
@@ -69,6 +59,13 @@ usersController.createUser = async (req, res, next) => {
     });
   }
 };
+
+// usersController.updateFaves = async(req, res, next) => {
+// try{
+//const { }
+
+// }
+// };
 
 // dbController.updateUser = async (req, res, next) => {
 //   try {
