@@ -17,7 +17,9 @@ piecesController.getArt = async (req, res, next) => {
   const { title } = req.body;
   try {
     console.log('entered getArt method in artPieceController');
-    const piece = await ArtPiece.find({ title });
+    const piece = await ArtPiece.findOne({ title: title });
+    console.log('title:', title);
+    console.log('piece-found', piece);
     res.locals.foundArt = piece;
     return next();
   } catch (err) {
@@ -31,25 +33,34 @@ piecesController.getArt = async (req, res, next) => {
 
 piecesController.createArt = async (req, res, next) => {
   // console.log('req: ', req.body);
-  // format the query using the info passed in on the body
-  console.log('req.body: ', req.body);
-  console.log('req.params: ', req.params);
-  console.log('req.query: ', req.query);
-  // console.log('req: ', req);
-  // console log the received response from the database
+  console.log(req.body);
+  const [
+    artist,
+    title,
+    description,
+    image,
+    ownerId,
+    forSale,
+    price,
+    priceClass,
+    style,
+    sizeClass,
+  ] = req.body;
 
   try {
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = verifyToken(token);
-    const userId = decodedToken.userId;
+    // const token = req.headers.authorization.split(' ')[1];
+    // const decodedToken = verifyToken(token);
+    // const userId = decodedToken.userId;
 
     const newArt = await ArtPiece.create({
+      artist,
       title,
+      description,
       image,
       ownerId,
       forSale,
-      description,
       price,
+      priceClass,
       style,
       sizeClass,
     });
@@ -113,6 +124,24 @@ piecesController.updateArt = async (req, res, next) => {
       status: 400,
       message: { err: 'An error occured while trying to update a user' },
     });
+  }
+};
+
+piecesController.updateFields = async (req, res, next) => {
+  try {
+    console.log('Entering pieces controller try block');
+    const { description, forSale, price } = req.params;
+    console.log('req.params:', req.params);
+    const allFields = await Art.findOneandUpdate(
+      {},
+      { description, forSale, price }
+    );
+    console.log('res.locals.allFields:', res.locals.allFields);
+    const result = res.locals.allFields[allFields];
+    console.log('result:', result);
+    return res.status(200).json(result);
+  } catch (err) {
+    return `Error in putting updatable data: ${err}`;
   }
 };
 

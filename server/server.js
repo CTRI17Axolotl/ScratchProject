@@ -85,7 +85,8 @@ app.get('/', cookieController.setCookie, (req, res) => {
 
 //Authorized Routes below
 app.use('/users', usersRouter);
-app.use('/pieces', artPieceRouter);
+app.use('/pieces', piecesRouter);
+app.use('/pieces/:pieceId', piecesRouter);
 
 //serve static files
 app.get('/', (req, res) => {
