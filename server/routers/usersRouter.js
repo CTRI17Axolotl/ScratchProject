@@ -40,6 +40,8 @@ router.post(
   '/login',
   usersController.getUser,
   (req, res) => {
+    console.log(res.locals.foundUser);
+    if(res.locals.foundUser === null) return res.status(401).json('No user found! Wrong username or password.')
     const userId = res.locals.foundUser._id.toString();
     return res.status(200).json(userId);
   }

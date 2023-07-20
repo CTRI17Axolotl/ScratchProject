@@ -22,6 +22,7 @@ usersController.getUser = async (req, res, next) => {
     const { username, password } = req.body;
     // console.log('Req.body: ', req.body);
     const user = await User.findOne({ username: username, password: password });
+    console.log(user);
     res.locals.foundUser = user;
     // console.log('Leaving User');
     return next();
