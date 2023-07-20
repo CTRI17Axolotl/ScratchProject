@@ -2,20 +2,61 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Gallery from '../components/Gallery.jsx';
-import fakeData from '../components/Placeholder.jsx';
+import FilterButtons from '../components/FilterButtons.jsx';
 import { StoreContext } from './dataStore.js';
+
+import fakeData from '../components/Placeholder.jsx';
 
 const Home = () => {
   const nav = useNavigate();
-  const { fullPieceList, currentFilters, updateFilteredList } =
-    useContext(StoreContext); // destructure dataStore vars for use
+  const {
+    fullPieceList,
+    currentFilters,
+    filteredPieceList,
+    updateFilteredList,
+    setFullPieceList,
+    setCurrentFilters,
+    activeUser,
+  } = useContext(StoreContext); // destructure dataStore vars for use
 
-  // useEffect(() => {
-  //   updateFilteredList();
-  // }, [fullPieceList, currentFilters]);
+  useEffect(() => {
+    console.log('setting list in 1s');
+    setTimeout(() => {
+      console.log('timeout');
+      setFullPieceList(fakeData.data);
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    console.log('calling filter with list ', fullPieceList, currentFilters);
+    updateFilteredList();
+  }, [fullPieceList, currentFilters]);
+
   return (
     <div className="base-container">
-      <h1>Stork Art Fair</h1>
+      <div className="header-container">
+        <div className="placeholder">{}</div>
+        <h1>Stork Art Fair</h1>
+        <div>
+          {activeUser ? (
+            <button
+              className="btn add-piece"
+              title="Submit New Art"
+              onClick={() => nav('addPiece')}
+            >
+              <i class="bi bi-plus-square" />
+            </button>
+          ) : (
+            <button
+              className="btn sign-in"
+              title="Sign In or New Account"
+              onClick={() => nav('signin')}
+            >
+              <i class="bi bi-person-fill" />
+            </button>
+          )}
+        </div>
+      </div>
       <div style={{ textAlign: 'center' }}>
         <span>
           <button onClick={() => nav('signin')}>Sign In</button>
@@ -24,7 +65,55 @@ const Home = () => {
           <button onClick={() => nav('addPiece')}>Add Piece</button>
         </span>
       </div>
-      <Gallery pieceList={fakeData.data}></Gallery>
+      <div style={{ textAlign: 'center' }}>
+        <span>
+          <button
+            onClick={() =>
+              setCurrentFilters([
+                [false, false, false],
+                [false, false, true],
+                [false, false, false, false, false],
+                [false],
+              ])
+            }
+          >
+            Big
+          </button>
+        </span>
+        <span>
+          <button
+            onClick={() =>
+              setCurrentFilters([
+                [false, false, false],
+                [false, true, false],
+                [false, false, false, false, false],
+                [false],
+              ])
+            }
+          >
+            Smol
+          </button>
+        </span>
+        <span>
+          <button
+            onClick={() =>
+              setCurrentFilters([
+                [false, false, false],
+                [false, false, false],
+                [false, false, false, false, false],
+                [false],
+              ])
+            }
+          >
+            All
+          </button>
+        </span>
+      </div>
+      <FilterButtons key={'filt'+currentFilters}/>
+      <Gallery
+        pieceList={filteredPieceList}
+        key={'filtered' + filteredPieceList.length + currentFilters}
+      ></Gallery>
       {/* <Link to={'user/17'} state={{ test: '45' }}>
         User 17
       </Link>

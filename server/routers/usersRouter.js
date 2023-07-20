@@ -24,10 +24,9 @@ router.get('/:name', usersController.getUser, (req, res) => {
 });
 
 //patch request with a req.params of name updateUser on the dbController
-router.patch('/:name', usersController.updateUser);
-(req, res) => {
+router.patch('/:name', usersController.updateUser, (req, res) => {
   return res.status(200).send(res.locals.updatedUser);
-};
+});
 
 //router with a request params of name to dbController to deleteUser
 router.delete('/:name', usersController.deleteUser, (req, res) => {
