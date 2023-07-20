@@ -18,7 +18,7 @@ cookieController.setCookie = (req, res, next) => {
   const randomNumber = Math.floor(Math.random() * 100);
 
   res.cookie('FloppyCookie', 'SeaSpider');
-  res.cookie('SecondFloppy', randomNumber);
+  // res.cookie('SecondFloppy', randomNumber);
   console.log('Bam Cookie Made ');
   next();
 };
