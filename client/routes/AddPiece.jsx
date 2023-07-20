@@ -28,7 +28,7 @@ export default function AddPiece(props) {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   }
 
-  // const nav = useNavigate();
+  const nav = useNavigate();
 
   function setURL(url) {
     if (url) {
@@ -46,9 +46,9 @@ export default function AddPiece(props) {
 
     async function addNewPiece() {
       const itemPrice = Number(formData.price);
-      const priceClass = (itemPrice < 100) ? 0 : ((itemPrice > 1000) ? 2 : 1);
-      const sizeL = (formData.sizeClass)[0]
-      const sizeClass = (sizeL === 'S') ? 0 : ((sizeL === 'M') ? 1 : 2);
+      const priceClass = itemPrice < 100 ? 0 : itemPrice > 1000 ? 2 : 1;
+      const sizeL = formData.sizeClass[0];
+      const sizeClass = sizeL === 'S' ? 0 : sizeL === 'M' ? 1 : 2;
       const newPiece = {
         ownerId: activeUser,
         artist: formData.artist,
@@ -59,7 +59,7 @@ export default function AddPiece(props) {
         price: itemPrice,
         priceClass: priceClass,
         sizeClass: sizeClass,
-        forSale: (formData.forSale==='true') ? true : false,
+        forSale: formData.forSale === 'true' ? true : false,
       };
       console.log('New Submission: ', newPiece);
       try {
@@ -78,6 +78,9 @@ export default function AddPiece(props) {
       }
     }
     addNewPiece();
+    setTimeout(() => {
+      nav('/');
+    }, 800);
   }
 
   // updateFullPieceList (  pieceListParsedFromServerBackend);
