@@ -28,7 +28,7 @@ export default function AddPiece(props) {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   }
 
-  // const nav = useNavigate();
+  const nav = useNavigate();
 
   function setURL(url) {
     if (url) {
@@ -45,6 +45,23 @@ export default function AddPiece(props) {
     //^ Get data submitted with Form fields
 
     async function addNewPiece() {
+      const itemPrice = Number(formData.price);
+      const priceClass = itemPrice < 100 ? 0 : itemPrice > 1000 ? 2 : 1;
+      const sizeL = formData.sizeClass[0];
+      const sizeClass = sizeL === 'S' ? 0 : sizeL === 'M' ? 1 : 2;
+      const newPiece = {
+        ownerId: activeUser,
+        artist: formData.artist,
+        title: formData.title,
+        description: formData.description,
+        style: formData.style,
+        image: formData.image,
+        price: itemPrice,
+        priceClass: priceClass,
+        sizeClass: sizeClass,
+        forSale: formData.forSale === 'true' ? true : false,
+      };
+      console.log('New Submission: ', newPiece);
       try {
         //^ Check if input fields are empty and return an error
         const response = await fetch('/pieces', {
@@ -52,17 +69,7 @@ export default function AddPiece(props) {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            ownerId: activeUser,
-            artist: formData.artist,
-            title: formData.title,
-            description: formData.description,
-            style: formData.style,
-            image: formData.image,
-            price: formData.price,
-            sizeClass: formData.sizeClass,
-            forSale: formData.forSale,
-          }),
+          body: JSON.stringify(newPiece),
         });
 
         setFormData(emptyForm);
@@ -71,6 +78,9 @@ export default function AddPiece(props) {
       }
     }
     addNewPiece();
+    setTimeout(() => {
+      nav('/');
+    }, 800);
   }
 
   // updateFullPieceList (  pieceListParsedFromServerBackend);
