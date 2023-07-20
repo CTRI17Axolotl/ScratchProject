@@ -50,21 +50,19 @@ export default function AddPiece(props) {
         const response = await fetch('/pieces', {
           method: 'POST',
           headers: {
-            'Content Type': 'application/json',
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify(
-            console.log({
-              ownerId: activeUser,
-              artist: formData.artist,
-              title: formData.title,
-              description: formData.description,
-              style: formData.style,
-              image: formData.image,
-              price: formData.price,
-              sizeClass: formData.sizeClass,
-              forSale: formData.forSale,
-            })
-          ),
+          body: JSON.stringify({
+            ownerId: activeUser,
+            artist: formData.artist,
+            title: formData.title,
+            description: formData.description,
+            style: formData.style,
+            image: formData.image,
+            price: formData.price,
+            sizeClass: formData.sizeClass,
+            forSale: formData.forSale,
+          }),
         });
 
         setFormData(emptyForm);
