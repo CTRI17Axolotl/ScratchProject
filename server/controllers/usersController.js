@@ -18,10 +18,12 @@ const verifyToken = (token) => {
 usersController.getUser = async (req, res, next) => {
   try {
     // console.log(req.params);
-    console.log(req.body);
+    // console.log('Entering User');
     const { username, password } = req.body;
+    // console.log('Req.body: ', req.body);
     const user = await User.findOne({ username: username, password: password });
     res.locals.foundUser = user;
+    // console.log('Leaving User');
     return next();
   } catch (err) {
     return next({

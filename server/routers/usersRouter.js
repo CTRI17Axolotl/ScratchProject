@@ -24,7 +24,11 @@ router.post(
   '/create',
   // authController.userSignup,
   usersController.createUser, //creates a user
+  // cookieController.setSSIDCookie, 
+  // sessionController.startSession,
   (req, res) => {
+    console.log('After user creater')
+    console.log('User Created!');
     return res.status(200).json(res.locals.newUser);
   }
 );

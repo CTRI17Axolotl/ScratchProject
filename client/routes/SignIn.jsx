@@ -5,8 +5,10 @@ import { useContext } from 'react';
 import { StoreContext } from './dataStore.js';
 
 const SignIn = () => {
+  
   const nav = useNavigate();
-
+  
+  const { setActiveUser } = useContext(StoreContext); // this is breaking my route
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [username, setUser] = useState('');
@@ -32,36 +34,32 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     event.preventDefault();
     if (!isSignUp) {
-      fetch('/users/login', {
-        method: 'POST',
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error('Wrong username or password.');
-            //some logic to either say wrong username/password
-            //some additional logic regarding the response (session/token?)
-            //perform authentication logic here with user database here!!
-          } else {
-            // const {setActiveUser} = useContext(StoreContext);
-            // setActiveUser(userId);
-            nav('/');
-          }
-        })
-        .catch((err) => {
-          throw new Error(
-            'Error occurred in post request to log in user ',
-            err
-          );
-        });
+      userLogIn();
     } else {
-      fetch('/users/create', {
+      userSignUp();
+    }
+  };
+
+  async function userLogIn() {
+    const res = await fetch('/users/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      });
+      const data = await res.json();
+      console.log('data from logging in ', data);
+      setActiveUser(data);
+      nav('/');
+  }
+
+  async function userSignUp() {
+    //use mongo request to retrieve objectId
+    const res = await fetch('/users/create', {
         method: 'POST',
         body: JSON.stringify({
           email: email,
@@ -69,26 +67,17 @@ const SignIn = () => {
           username: username,
           password: password,
         }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error('Cannot create new user');
-            //some logic to either say wrong username/password
-            //OR a change in the route to change it into a sign up page
-          } else {
-            //some additional logic regarding the response (session/token?)
-            //perform authentication logic here with user database here!!
-            nav('/');
-          }
-        })
-        .catch((err) => {
-          throw new Error('Error occurred post request to create user ', err);
-        });
-    }
-  };
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      });
+       if(res.ok) {
+        setIsSignUp(false);
+        setUser('');
+        setPassword('');
+       }
+    };
+
   //use inputValue to fetch for user database
   return (
     <div className="signin-container">
