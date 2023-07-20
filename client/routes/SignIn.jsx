@@ -51,6 +51,12 @@ const SignIn = () => {
         'Content-Type': 'application/json',
       },
       });
+      if(!res.ok){
+        alert('Wrong username or password. Please re-enter or sign up!');
+        setUser('');
+        setPassword('');
+        return nav('/signin');
+      }
       const data = await res.json();
       console.log('data from logging in ', data);
       setActiveUser(data);
