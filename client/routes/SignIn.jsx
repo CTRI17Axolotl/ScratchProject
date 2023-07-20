@@ -81,6 +81,7 @@ const SignIn = () => {
             //some logic to either say wrong username/password
             //OR a change in the route to change it into a sign up page
           } else {
+            const data = res.json()
             //some additional logic regarding the response (session/token?)
             //perform authentication logic here with user database here!!
             nav('/signin');
