@@ -2,11 +2,19 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Piece = ({ pieceData }) => {
+  const clickHandler = (e) => {
+    console.log('Clicked by ', e.target);
+  };
+
   return (
     <motion.div
       layout
-      id={'piece' + pieceData.itemId}
-      key={'piece' + pieceData.itemId}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      initial={{ opacity: 0, scale: 0.5, y: 200 }}
+      exit={{ opacity: 0, scale: 0 }}
+      transition={{ duration: 0.1 }}
+      id={'piece' + pieceData.pieceId}
+      key={'piece' + pieceData.pieceId}
       className="piece-container"
     >
       <div className="piece-image-container">
@@ -15,8 +23,10 @@ const Piece = ({ pieceData }) => {
       <div className="piece-content">
         <div className="piece-text">
           <p>{pieceData.title}</p>
-          <p>{'by '+pieceData.artist}</p>
-          <p>{pieceData.forSale ? 'Price: $'+pieceData.price : 'Not for Sale'}</p>
+          <p>{'by ' + pieceData.artist}</p>
+          <p>
+            {pieceData.forSale ? 'Price: $' + pieceData.price : 'Not for Sale'}
+          </p>
           {/* <p>
             {pieceData.forSale
               ? 'For Sale by ' + pieceData.ownerId
@@ -24,8 +34,34 @@ const Piece = ({ pieceData }) => {
           </p> */}
         </div>
         <div className="piece-buttons">
-          {pieceData.isFave ? <p>"❤️"</p> : <p>"🖤"</p>}
-          {pieceData.isOwner ? <p>Edit</p> : <p>--</p>}
+          {pieceData.isFave ? (
+            <button
+              className="content-btn"
+              onClick={clickHandler}
+              id={'l' + pieceData.pieceId}
+            >
+              <i className="bi bi-heart-fill" id={'m' + pieceData.pieceId}></i>
+            </button>
+          ) : (
+            <button
+              className="content-btn"
+              onClick={clickHandler}
+              id={'u' + pieceData.pieceId}
+            >
+              <i className="bi bi-heart" id={'v' + pieceData.pieceId} onClick={clickHandler}></i>
+            </button>
+          )}
+          {pieceData.isOwner ? (
+            <button
+              className="content-btn"
+              onClick={clickHandler}
+              id={'e' + pieceData.pieceId}
+            >
+              <i className="bi bi-pencil-square" id={'f' + pieceData.pieceId}></i>
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </motion.div>

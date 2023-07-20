@@ -12,7 +12,7 @@ GET /users -- send array of _some_ data for all users -- userId, name, email, an
 POST /users/login -- receive username, password -- verify user, return session [x]
 POST /users/create -- receive username, password, name, email -- create user if valid, return session [x]
 ~~POST /users/logout -- destroy session (is this necessary?)~~
-PUT /users/updateFaves -- receive array of pieceId, authenticate, update that user's favorites, return updated array for all users (see GET /users)
+PUT /users/updateFaves -- receive array of pieceId 's, authenticate, update that user's favorites, return updated array for all users (see GET /users)
 
 ### Users
 
@@ -26,8 +26,7 @@ PUT /users/updateFaves -- receive array of pieceId, authenticate, update that us
 
 ### Pieces
 
-<!-- - pieceId - Unique ID - ID-  autogen?  -->
-
+- pieceId - Unique ID - ID- autogen?
 - image - url / string ??
 - title - String
 - artist - String
