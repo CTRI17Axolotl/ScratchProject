@@ -20,43 +20,46 @@ const Home = () => {
   } = useContext(StoreContext); // destructure dataStore vars for use
 
   useEffect(() => {
-    const fetchPieces = async () => {
-      try {
-        const response = await fetch('/pieces', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        const incomingPieces = await response.json();
-        const parsedPieces = JSON.parse(JSON.stringify(incomingPieces));
-        console.log('Received Piece directory: ', parsedPieces);
-      } catch (err) {
-        console.log('Error fetching Pieces: ', err);
-      }
-    };
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('/users', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        const incomingUsers = await response.json();
-        const parsedUsers = JSON.parse(JSON.stringify(incomingUsers));
-        console.log('Received User directory: ', parsedUsers);
-      } catch (err) {
-        console.log('Error fetching Users: ', err);
-      }
-    };
-    fetchData();
-    fetchUsers();
-    // console.log('setting list in 1s');
-    // setTimeout(() => {
-    //   console.log('timeout');
-    //   setFullPieceList(fakeData.data);
-    // }, 1000);
+    if (false) {
+      const fetchPieces = async () => {
+        try {
+          const response = await fetch('/pieces', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const incomingPieces = await response.json();
+          const parsedPieces = JSON.parse(JSON.stringify(incomingPieces));
+          console.log('Received Piece directory: ', parsedPieces);
+        } catch (err) {
+          console.log('Error fetching Pieces: ', err);
+        }
+      };
+      const fetchUsers = async () => {
+        try {
+          const response = await fetch('/users', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const incomingUsers = await response.json();
+          const parsedUsers = JSON.parse(JSON.stringify(incomingUsers));
+          console.log('Received User directory: ', parsedUsers);
+        } catch (err) {
+          console.log('Error fetching Users: ', err);
+        }
+      };
+      fetchData();
+      fetchUsers();
+    } else {
+      console.log('setting list in 1s');
+      setTimeout(() => {
+        console.log('timeout');
+        setFullPieceList(fakeData.data);
+      }, 1000);
+    }
   }, []);
 
   useEffect(() => {
@@ -76,7 +79,7 @@ const Home = () => {
               title="Submit New Art"
               onClick={() => nav('addPiece')}
             >
-              <i class="bi bi-plus-square" />
+              <i className="bi bi-plus-square" />
             </button>
           ) : (
             <button
@@ -84,7 +87,7 @@ const Home = () => {
               title="Sign In or New Account"
               onClick={() => nav('signin')}
             >
-              <i class="bi bi-person-fill" />
+              <i className="bi bi-person-fill" />
             </button>
           )}
         </div>
@@ -141,7 +144,7 @@ const Home = () => {
           </button>
         </span>
       </div>
-      <FilterButtons key={'filt' + currentFilters} />
+      <FilterButtons  key={'filt' + currentFilters} />
       <Gallery
         pieceList={filteredPieceList}
         key={'filtered' + filteredPieceList.length + currentFilters}

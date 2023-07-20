@@ -14,6 +14,7 @@ const UploadWidget = ({ setURL }) => {
       },
       function (error, result) {
         // setImgURL(result.info.secure_url);
+        // console.log('passingurl' + result.info.secure_url);
         setURL(result.info.secure_url);
       }
     );

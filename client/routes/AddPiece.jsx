@@ -1,4 +1,3 @@
-
 // Imports
 import React, { useContext, useState } from 'react';
 import { StoreContext } from './dataStore';
@@ -20,12 +19,10 @@ function AddPiece() {
     forSale: '',
   };
 
-  const [ formData, setFormData ] = useState(emptyForm);
+  const [formData, setFormData] = useState(emptyForm);
 
   const { activeUser, updateFullPieceList } = useContext(StoreContext);
-  console.log(activeUser)
-
-
+  console.log(activeUser);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -40,6 +37,20 @@ function AddPiece() {
     //^ Get data submitted with Form fields
 
     async function addNewPiece() {
+      console.log(
+        'Here post' +
+          {
+            ownerId: activeUser,
+            artist: formData.artist,
+            title: formData.title,
+            description: formData.description,
+            style: formData.style,
+            image: imageURL,
+            price: formData.price,
+            sizeClass: formData.size,
+            forSale: formData.sale,
+          }
+      );
       try {
         //^ Check if input fields are empty and return an error
         const response = await fetch('/pieces', {
@@ -69,9 +80,12 @@ function AddPiece() {
 
   let imageURL;
   function setURL(url) {
-    imageURL = url;
+    if (url) {
+      imageURL = url;
+      console.log('received url' + url);
+    }
   }
-  
+
   console.log('imageURL: ', imageURL);
   // updateFullPieceList (  pieceListParsedFromServerBackend);
 
@@ -79,9 +93,11 @@ function AddPiece() {
     <div className="form-container">
       <div className="form-contents">
         <h2>Upload a New Piece</h2>
-        <hr /><br />
-          <UploadWidget setURL={setURL} />
-          <br /><br />
+        <hr />
+        <br />
+        <UploadWidget setURL={setURL} />
+        <br />
+        <br />
 
         <form onSubmit={handleSubmit} className="form">
           <div>
@@ -115,14 +131,15 @@ function AddPiece() {
               <h3>Pieces's Description</h3>
             </label>
             <textarea
-            type="text" 
-            id="description" name="description"
-            rows="5"
-            cols="16"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Enter description here...">
-            </textarea>
+              type="text"
+              id="description"
+              name="description"
+              rows="5"
+              cols="16"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Enter description here..."
+            ></textarea>
           </div>
           <div>
             <label htmlFor="title">
@@ -136,7 +153,7 @@ function AddPiece() {
               onChange={handleChange}
               placeholder="Art Style Category"
             ></input>
-            <datalist id='category'>
+            <datalist id="category">
               <option>Realism</option>
               <option>Classicism</option>
               <option>Modernism</option>
@@ -170,7 +187,7 @@ function AddPiece() {
               onChange={handleChange}
               placeholder="Size Value"
             ></input>
-              <datalist id='sizing'>
+            <datalist id="sizing">
               <option>Small &nbsp; &nbsp; - up to 2' x 2'</option>
               <option>Medium - up to 4' x 4'</option>
               <option>Large &nbsp; &nbsp; - over 4' x 4'</option>
@@ -189,10 +206,10 @@ function AddPiece() {
               onChange={handleChange}
               placeholder="On the Market?"
             ></input>
-              <datalist id='forSale'>
+            <datalist id="forSale">
               <option>true</option>
               <option>false</option>
-              </datalist>
+            </datalist>
           </div>
           <button className="addPieceSubmit">Submit</button>
         </form>
@@ -202,4 +219,3 @@ function AddPiece() {
 }
 
 export default AddPiece;
-
