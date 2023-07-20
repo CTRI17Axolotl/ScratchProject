@@ -34,18 +34,17 @@ piecesController.getArt = async (req, res, next) => {
 piecesController.createArt = async (req, res, next) => {
   // console.log('req: ', req.body);
   console.log(req.body);
-  const [
+  const {
+    ownerId,
     artist,
     title,
     description,
-    image,
-    ownerId,
-    forSale,
-    price,
-    priceClass,
     style,
+    image,
+    price,
     sizeClass,
-  ] = req.body;
+    forSale,
+ } = req.body;
 
   try {
     // const token = req.headers.authorization.split(' ')[1];
@@ -53,16 +52,15 @@ piecesController.createArt = async (req, res, next) => {
     // const userId = decodedToken.userId;
 
     const newArt = await ArtPiece.create({
+      ownerId,
       artist,
       title,
       description,
-      image,
-      ownerId,
-      forSale,
-      price,
-      priceClass,
       style,
+      image,
+      price,
       sizeClass,
+      forSale,
     });
     res.locals.newArt = newArt;
     return next();

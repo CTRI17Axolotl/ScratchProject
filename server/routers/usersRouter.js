@@ -32,12 +32,12 @@ router.post(
     return res.status(200).json(res.locals.newUser);
   }
 );
+
 // myObjectId = ObjectId('507c7f79bcf86cd7994f6c0e');
 // myObjectIdString = myObjectId.toString();
+
 router.post(
   '/login',
-  cookieController.setCookie,
-  sessionController.startSession,
   usersController.getUser,
   (req, res) => {
     const userId = res.locals.foundUser._id.toString();
