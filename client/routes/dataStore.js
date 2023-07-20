@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export const StoreContext = React.createContext('null');
 
@@ -17,13 +17,69 @@ export default ({ children }) => {
   // filter price, size, collection, faved
   const [currentPieceFocus, setCurrentPieceFocus] = useState(false); // focus.pc
   const [userList, setUserList] = useState([]); // user list
-  const [activeUser, setActiveUser] = useState(false); // logged in userfalse
+  const [activeUser, setActiveUser] = useState(false); // active user
+  const [userFaves, setUserFaves] = useState([]);
+  const [focusPieceFilterIndex, setFocusPieceFilterIndex] = useState();
+
   const updateFullPieceList = (list) => {
     setFullPieceList(list);
     updateFilteredList(list);
   };
-  const [pallet, setPallet] = useState(0);
-  const numberOfPallets = 4;
+  const [palette, setPalette] = useState(0);
+  const numberOfPalettes = 4;
+
+  // const updateFavorites = (user, piece, status) => {
+  //   if (user) {
+  //     // got called from gallery with specifics
+  //     const newUserFaves = [...userFaves];
+  //     if (status) {
+  //       newUserFaves.push(piece);
+  //     } else {
+  //       newUserFaves.splice(newUserFaves.indexOf(piece), 1);
+  //     }
+  //     console.log('setting new user faves', newUserFaves);
+  //     setUserFaves(newUserFaves);
+  //   } else {
+  //     // check for active, build list from their favorites
+  //     if (activeUser) {
+  //       const userData = userList.find((el) => el._id === activeUser);
+  //       setUserFaves(userData.favorites);
+  //     }
+  //   }
+  // };
+
+  const pushFavorites = async () => {
+    if (false) {
+      try {
+        const response = await fetch('/users/updateFaves', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user: activeUser,
+            favorites: userFaves,
+          }),
+        });
+        const responseParsed = await response.json();
+        console.log('Tried to update favorites, response: ', responseParsed);
+      } catch {
+        console.log(
+          'some communication issue with updating favorites proceed locally'
+        );
+      }
+    }
+  };
+
+  // const getUserFavorites = async (newActiveUser) => {
+  //   setActiveUserState(newActiveUser);
+  //   const userPositionInList = userList.findIndex(
+  //     (el) => el._id === newActiveUser
+  //   );
+  //   if (userPositionInList >= 0) {
+  //     const thisUserFaves = userList[userPositionInList].favorites;
+  //     setUserList(thisUserFaves);
+  // };
 
   const updateFilteredList = (list = fullPieceList) => {
     // console.log('filtering with list: ', list);
@@ -99,9 +155,13 @@ export default ({ children }) => {
     setUserList: setUserList,
     activeUser: activeUser,
     setActiveUser: setActiveUser,
-    pallet: pallet,
-    setPallet: setPallet,
-    numberOfPallets: numberOfPallets,
+    userFaves: userFaves,
+    setUserFaves: setUserFaves,
+    palette: palette,
+    setPalette: setPalette,
+    numberOfPalettes: numberOfPalettes,
+    focusPieceFilterIndex: focusPieceFilterIndex,
+    setFocusPieceFilterIndex: setFocusPieceFilterIndex,
   };
 
   return (

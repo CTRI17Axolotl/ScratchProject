@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Piece = ({ pieceData }) => {
+const Piece = ({ pieceData, setFave, pieceIndex, isFaved }) => {
   const clickHandler = (e) => {
-    console.log('Clicked by ', e.target);
+    // console.log('Clicked by ', e.target.id);
+    setFave(e.target.id.slice(1), !isFaved);
   };
 
   return (
@@ -34,21 +35,29 @@ const Piece = ({ pieceData }) => {
           </p> */}
         </div>
         <div className="piece-buttons">
-          {pieceData.isFave ? (
+          {isFaved ? (
             <button
               className="content-btn"
               onClick={clickHandler}
-              id={'l' + pieceData._id}
+              id={'l' + pieceIndex}
             >
-              <i className="bi bi-heart-fill" id={'m' + pieceData._id}></i>
+              <i
+                className="bi bi-heart-fill"
+                onClick={clickHandler}
+                id={'m' + pieceIndex}
+              ></i>
             </button>
           ) : (
             <button
               className="content-btn"
               onClick={clickHandler}
-              id={'u' + pieceData._id}
+              id={'u' + pieceIndex}
             >
-              <i className="bi bi-heart" id={'v' + pieceData._id} onClick={clickHandler}></i>
+              <i
+                className="bi bi-heart"
+                id={'v' + pieceIndex}
+                onClick={clickHandler}
+              ></i>
             </button>
           )}
           {pieceData.isOwner ? (

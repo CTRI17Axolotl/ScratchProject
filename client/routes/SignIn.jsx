@@ -8,7 +8,8 @@ import backgrounds from '../components/Backgrounds.js';
 const SignIn = () => {
   const nav = useNavigate();
 
-  const { setActiveUser, pallet } = useContext(StoreContext); // this is breaking my route
+  const { setActiveUser, activeUser, palette, userList, setUserFaves } =
+    useContext(StoreContext); // this is breaking my route
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [username, setUser] = useState('');
@@ -16,8 +17,8 @@ const SignIn = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
   useEffect(() => {
-    document.body.style.backgroundImage = `url('${backgrounds.signIn[pallet]}')`;
-  }, [pallet]);
+    document.body.style.backgroundImage = `url('${backgrounds.signIn[palette]}')`;
+  }, [palette]);
 
   const handleUserChange = (e) => {
     setUser(e.target.value);
@@ -64,7 +65,15 @@ const SignIn = () => {
     const data = await res.json();
     console.log('data from logging in ', data);
     setActiveUser(data);
-    nav('/');
+    const userIndex = userList.findIndex((el) => el._id === data);
+    console.log('Logged in as user ', data, ', setting faves to ', [
+      userList[userIndex].favorites,
+    ]);
+    setUserFaves(userList[userIndex].favorites);
+    setTimeout(() => {
+      nav('/');
+      console.log('Current active user:', activeUser);
+    }, 800);
   }
 
   async function userSignUp() {

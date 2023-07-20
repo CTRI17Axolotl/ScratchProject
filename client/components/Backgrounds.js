@@ -1,4 +1,4 @@
-// Background Arrays per pallet
+// Background Arrays per palette
 const bg = {
   home: [
     '',

@@ -2,8 +2,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { StoreContext } from './dataStore';
 import { Link, useNavigate } from 'react-router-dom';
-import Gallery from '../components/Gallery.jsx';
-import fakeData from '../components/Placeholder.jsx';
 import UploadWidget from '../components/UploadWidget.jsx';
 import backgrounds from '../components/Backgrounds.js';
 
@@ -22,11 +20,11 @@ export default function AddPiece(props) {
 
   const [formData, setFormData] = useState(emptyForm);
   const nav = useNavigate();
-  const { activeUser, updateFullPieceList, pallet } = useContext(StoreContext);
+  const { activeUser, updateFullPieceList, palette } = useContext(StoreContext);
 
   useEffect(() => {
-    document.body.style.backgroundImage = `url('${backgrounds.addPiece[pallet]}')`;
-  }, [pallet]);
+    document.body.style.backgroundImage = `url('${backgrounds.addPiece[palette]}')`;
+  }, [palette]);
 
   function handleChange(event) {
     const { name, value } = event.target;

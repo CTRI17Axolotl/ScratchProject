@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { StoreContext } from '../routes/dataStore.js';
 
 const FilterButtons = () => {
-  const { currentFilters, setCurrentFilters, activeUser } =
+  const { currentFilters, setCurrentFilters, activeUser, userFaves } =
     useContext(StoreContext);
 
   const [styleBtns, setStyleBtns] = useState([]);
@@ -27,7 +27,8 @@ const FilterButtons = () => {
       if (!currentFilters[2][sBtn]) newToggles[2][sBtn] = true;
     } else if (sType === 3) {
       //fave
-      newToggles[3][0] = !currentFilters[3][0];
+      console.log('Active user', activeUser, 'favorites', userFaves);
+      // newToggles[3][0] = !currentFilters[3][0];
     } else console.log('Somehow received a wierd click');
     console.log('Writing filter toggles:', newToggles);
     setCurrentFilters(newToggles);

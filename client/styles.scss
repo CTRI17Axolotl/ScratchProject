@@ -200,6 +200,7 @@ $btnrad: 70px;
   .btn-group {
     margin: 10px;
     padding: 5px;
+    user-select: none;
   }
   .btn-group .button {
     border-radius: 0;
@@ -224,6 +225,10 @@ $btnrad: 70px;
     border: 1px var(--b-color) solid;
     background-color: #fff;
     transition: all 0.2s;
+    user-select: none;
+    a {
+      user-select: none;
+    }
   }
 
   .filter.active {
@@ -251,7 +256,7 @@ $btnrad: 70px;
   }
 }
 
-#app-container.pallet0 {
+#app-container.palette0 {
   @extend #app-container;
   --b-color: rgba(97, 145, 215, 1);
   --b-color-light: rgba(97, 145, 215, 0.7);
@@ -259,14 +264,14 @@ $btnrad: 70px;
   --page-color: white;
 }
 
-#app-container.pallet1 {
+#app-container.palette1 {
   @extend #app-container;
   --b-color: rgb(228, 35, 190);
   --b-color-light: rgba(228, 35, 190, 0.7);
   --container-color: rgba(86, 132, 132, 0.4);
 }
 
-#app-container.pallet2 {
+#app-container.palette2 {
   @extend #app-container;
   --b-color: rgb(20, 150, 47);
   --b-color-light: rgba(34, 184, 67, 0.7);
@@ -274,9 +279,9 @@ $btnrad: 70px;
   --page-color: light-pink;
 }
 
-#app-container.pallet3 {
+#app-container.palette3 {
   @extend #app-container;
-  --b-color: rgba(20, 20, 20,.8);
-  --b-color-light: rgba(80, 80, 80,.7);
+  --b-color: rgba(20, 20, 20, 0.8);
+  --b-color-light: rgba(80, 80, 80, 0.7);
   --container-color: rgba(220, 220, 220, 0.8);
 }

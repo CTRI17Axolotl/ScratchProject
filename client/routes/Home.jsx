@@ -19,14 +19,29 @@ const Home = () => {
     setCurrentFilters,
     activeUser,
     setUserList,
-    pallet,
-    setPallet,
-    numberOfPallets,
+    userList,
+    userFaves,
+    palette,
+    setPalette,
+    numberOfPalettes,
+    updateFavorites,
+    pushFavorites,
   } = useContext(StoreContext); // destructure dataStore vars for use
 
   useEffect(() => {
-    document.body.style.backgroundImage = `url('${backgrounds.home[pallet]}')`;
-  }, [pallet]);
+    // palette -> update background
+    document.body.style.backgroundImage = `url('${backgrounds.home[palette]}')`;
+  }, [palette]);
+
+  // useEffect(() => {
+  //   // mod user list (new, fav-changes) -> update current faves
+  //   updateFavorites();
+  // }, [userList, activeUser]);
+
+  // useEffect(() => {
+  //   // change current faves -> push changes
+  //   pushFavorites();
+  // }, [userFaves]);
 
   useEffect(() => {
     if (true) {
@@ -56,7 +71,7 @@ const Home = () => {
           });
           const incomingUsers = await response.json();
           const parsedUsers = JSON.parse(JSON.stringify(incomingUsers));
-          // console.log('Received User directory: ', parsedUsers);
+          console.log('Received User directory: ', parsedUsers);
           setUserList(parsedUsers);
         } catch (err) {
           console.log('Error fetching Users: ', err);
@@ -78,27 +93,27 @@ const Home = () => {
     updateFilteredList();
   }, [fullPieceList, currentFilters]);
 
-  const nextPallet = () => {
-    const newPallet = pallet > numberOfPallets - 2 ? 0 : pallet + 1;
-    setPallet(newPallet);
+  const nextPalette = () => {
+    const newPalette = palette > numberOfPalettes - 2 ? 0 : palette + 1;
+    setPalette(newPalette);
   };
 
   useEffect(() => {
     const appContainer = document.getElementById('app-container');
-    for (let i = 0; i < numberOfPallets; i++) {
-      appContainer.classList.remove('pallet' + i);
+    for (let i = 0; i < numberOfPalettes; i++) {
+      appContainer.classList.remove('pal' + i);
     }
-    appContainer.classList.add('pallet' + pallet);
+    appContainer.classList.add('palette' + palette);
     console.log('Current clases: ', appContainer.classList);
-  }, [pallet]);
+  }, [palette]);
 
   return (
     <div className="base-container">
       <div className="header-container">
         <button
-          className="btn pallet"
-          title="Change Pallet"
-          onClick={() => nextPallet()}
+          className="btn palette"
+          title="Change Palette"
+          onClick={() => nextPalette()}
         >
           <i className="bi bi-palette-fill" />
         </button>
@@ -123,14 +138,6 @@ const Home = () => {
           )}
         </div>
       </div>
-      {/* <div style={{ textAlign: 'center' }}>
-        <span>
-          <button onClick={() => nextPallet()}>Next Pallet</button>
-        </span>
-        <span>
-          <button onClick={() => nav('addPiece')}>Add Piece</button>
-        </span>
-      </div> */}
 
       <FilterButtons key={'filt' + currentFilters} />
       <Gallery
