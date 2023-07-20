@@ -1,4 +1,3 @@
-
 // Imports
 import React, { useContext, useState } from 'react';
 import { StoreContext } from './dataStore';
@@ -20,12 +19,10 @@ export default function AddPiece(props) {
     forSale: '',
   };
 
-  const [ formData, setFormData ] = useState(emptyForm);
+  const [formData, setFormData] = useState(emptyForm);
 
   const { activeUser, updateFullPieceList } = useContext(StoreContext);
-  console.log(activeUser)
-
-
+  console.log(activeUser);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -39,13 +36,26 @@ export default function AddPiece(props) {
     imageURL = url;
   }
 
-
   function handleSubmit(event) {
     event.preventDefault();
 
     //^ Get data submitted with Form fields
 
     async function addNewPiece() {
+      console.log(
+        'Here post' +
+          {
+            ownerId: activeUser,
+            artist: formData.artist,
+            title: formData.title,
+            description: formData.description,
+            style: formData.style,
+            image: imageURL,
+            price: formData.price,
+            sizeClass: formData.size,
+            forSale: formData.sale,
+          }
+      );
       try {
         //^ Check if input fields are empty and return an error
         const response = await fetch('/pieces', {
@@ -67,13 +77,11 @@ export default function AddPiece(props) {
         });
 
         setFormData(emptyForm);
-
-
       } catch (err) {
         console.log(err);
       }
     }
-    
+
     let imageURL;
     function setURL(url) {
       imageURL = url;
@@ -81,7 +89,6 @@ export default function AddPiece(props) {
     addNewPiece();
   }
 
-  
   console.log('imageURL: ', imageURL);
   // updateFullPieceList (  pieceListParsedFromServerBackend);
 
@@ -89,9 +96,11 @@ export default function AddPiece(props) {
     <div className="form-container">
       <div className="form-contents">
         <h2>Upload a New Piece</h2>
-        <hr /><br />
-          <UploadWidget setURL={setURL} />
-          <br /><br />
+        <hr />
+        <br />
+        <UploadWidget setURL={setURL} />
+        <br />
+        <br />
 
         <form onSubmit={handleSubmit} className="form">
           <div>
@@ -125,14 +134,15 @@ export default function AddPiece(props) {
               <h3>Pieces's Description</h3>
             </label>
             <textarea
-            type="text" 
-            id="description" name="description"
-            rows="5"
-            cols="16"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Enter description here...">
-            </textarea>
+              type="text"
+              id="description"
+              name="description"
+              rows="5"
+              cols="16"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Enter description here..."
+            ></textarea>
           </div>
           <div>
             <label htmlFor="title">
@@ -146,7 +156,7 @@ export default function AddPiece(props) {
               onChange={handleChange}
               placeholder="Art Style Category"
             ></input>
-            <datalist id='category'>
+            <datalist id="category">
               <option>Realism</option>
               <option>Classicism</option>
               <option>Modernism</option>
@@ -180,7 +190,7 @@ export default function AddPiece(props) {
               onChange={handleChange}
               placeholder="Size Value"
             ></input>
-              <datalist id='sizing'>
+            <datalist id="sizing">
               <option>Small &nbsp; &nbsp; - up to 2' x 2'</option>
               <option>Medium - up to 4' x 4'</option>
               <option>Large &nbsp; &nbsp; - over 4' x 4'</option>
@@ -199,10 +209,10 @@ export default function AddPiece(props) {
               onChange={handleChange}
               placeholder="On the Market?"
             ></input>
-              <datalist id='sale'>
+            <datalist id="sale">
               <option>true</option>
               <option>false</option>
-              </datalist>
+            </datalist>
           </div>
           <button className="addPieceSubmit">Submit</button>
         </form>
