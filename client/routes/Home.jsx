@@ -5,7 +5,7 @@ import Gallery from '../components/Gallery.jsx';
 import FilterButtons from '../components/FilterButtons.jsx';
 import { StoreContext } from './dataStore.js';
 
-import fakeData from '../components/Placeholder.jsx';
+// import fakeData from '../components/Placeholder.jsx';
 
 const Home = () => {
   const nav = useNavigate();
@@ -17,10 +17,11 @@ const Home = () => {
     setFullPieceList,
     setCurrentFilters,
     activeUser,
+    setUserList,
   } = useContext(StoreContext); // destructure dataStore vars for use
 
   useEffect(() => {
-    if (false) {
+    if (true) {
       const fetchPieces = async () => {
         try {
           const response = await fetch('/pieces', {
@@ -32,6 +33,7 @@ const Home = () => {
           const incomingPieces = await response.json();
           const parsedPieces = JSON.parse(JSON.stringify(incomingPieces));
           console.log('Received Piece directory: ', parsedPieces);
+          setFullPieceList(parsedPieces);
         } catch (err) {
           console.log('Error fetching Pieces: ', err);
         }
@@ -46,12 +48,13 @@ const Home = () => {
           });
           const incomingUsers = await response.json();
           const parsedUsers = JSON.parse(JSON.stringify(incomingUsers));
-          console.log('Received User directory: ', parsedUsers);
+          // console.log('Received User directory: ', parsedUsers);
+          setUserList(parsedUsers);
         } catch (err) {
           console.log('Error fetching Users: ', err);
         }
       };
-      fetchData();
+      fetchPieces();
       fetchUsers();
     } else {
       console.log('setting list in 1s');
@@ -144,7 +147,7 @@ const Home = () => {
           </button>
         </span>
       </div>
-      <FilterButtons  key={'filt' + currentFilters} />
+      <FilterButtons key={'filt' + currentFilters} />
       <Gallery
         pieceList={filteredPieceList}
         key={'filtered' + filteredPieceList.length + currentFilters}

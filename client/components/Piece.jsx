@@ -13,8 +13,8 @@ const Piece = ({ pieceData }) => {
       initial={{ opacity: 0, scale: 0.5, y: 200 }}
       exit={{ opacity: 0, scale: 0 }}
       transition={{ duration: 0.1 }}
-      id={'piece' + pieceData.pieceId}
-      key={'piece' + pieceData.pieceId}
+      id={'piece' + pieceData._id}
+      key={'piece' + pieceData._id}
       className="piece-container"
     >
       <div className="piece-image-container">
@@ -38,26 +38,26 @@ const Piece = ({ pieceData }) => {
             <button
               className="content-btn"
               onClick={clickHandler}
-              id={'l' + pieceData.pieceId}
+              id={'l' + pieceData._id}
             >
-              <i className="bi bi-heart-fill" id={'m' + pieceData.pieceId}></i>
+              <i className="bi bi-heart-fill" id={'m' + pieceData._id}></i>
             </button>
           ) : (
             <button
               className="content-btn"
               onClick={clickHandler}
-              id={'u' + pieceData.pieceId}
+              id={'u' + pieceData._id}
             >
-              <i className="bi bi-heart" id={'v' + pieceData.pieceId} onClick={clickHandler}></i>
+              <i className="bi bi-heart" id={'v' + pieceData._id} onClick={clickHandler}></i>
             </button>
           )}
           {pieceData.isOwner ? (
             <button
               className="content-btn"
               onClick={clickHandler}
-              id={'e' + pieceData.pieceId}
+              id={'e' + pieceData._id}
             >
-              <i className="bi bi-pencil-square" id={'f' + pieceData.pieceId}></i>
+              <i className="bi bi-pencil-square" id={'f' + pieceData._id}></i>
             </button>
           ) : (
             <></>

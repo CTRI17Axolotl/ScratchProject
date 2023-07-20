@@ -21,6 +21,7 @@ module.exports = {
       'process.env': dotenv.parsed,
     }),
   ],
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {

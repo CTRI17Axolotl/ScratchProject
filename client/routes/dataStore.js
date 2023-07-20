@@ -24,7 +24,7 @@ export default ({ children }) => {
   };
 
   const updateFilteredList = (list = fullPieceList) => {
-    console.log('filtering with list: ', list);
+    // console.log('filtering with list: ', list);
     const currentPieceList = [...list];
     let currentUserFaves;
     if (currentFilters[3][0] && activeUser) {
@@ -50,7 +50,8 @@ export default ({ children }) => {
           'Classicism',
           'Photography',
           'Sculpture',
-        ].indexOf(el.collection);
+        ].indexOf(el.style);
+        // console.log('Filtering style choice ',thisElCollec);
         if (currentFilters[2][thisElCollec] == false) return false;
       }
       if (currentFilters[3][0] && activeUser) {
@@ -59,7 +60,7 @@ export default ({ children }) => {
       }
       return true;
     });
-    console.log('Updated filter list: ', newFilteredPieceList);
+    // console.log('Updated filter list: ', newFilteredPieceList);
     // setFilteredPieceList(newFilteredPieceList);
     setFilteredPieceList(randomize(newFilteredPieceList)); // shuffle each time?
   };
