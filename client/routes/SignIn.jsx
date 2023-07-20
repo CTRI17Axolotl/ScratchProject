@@ -42,7 +42,6 @@ const SignIn = () => {
           'Content-Type': 'application/json',
         },
       })
-        // response is a returned session?
         .then((res) => {
           if (!res.ok) {
             throw new Error('Wrong username or password.');
@@ -50,9 +49,8 @@ const SignIn = () => {
             //some additional logic regarding the response (session/token?)
             //perform authentication logic here with user database here!!
           } else {
-            const data = res.json();
-            const { setActiveUser } = useContext(StoreContext);
-            setActiveUser(data);
+            // const {setActiveUser} = useContext(StoreContext);
+            // setActiveUser(userId);
             nav('/');
           }
         })
@@ -77,14 +75,13 @@ const SignIn = () => {
       })
         .then((res) => {
           if (!res.ok) {
-            throw new Error('Wrong username or password.');
+            throw new Error('Cannot create new user');
             //some logic to either say wrong username/password
             //OR a change in the route to change it into a sign up page
           } else {
-            const data = res.json()
             //some additional logic regarding the response (session/token?)
             //perform authentication logic here with user database here!!
-            nav('/signin');
+            nav('/');
           }
         })
         .catch((err) => {

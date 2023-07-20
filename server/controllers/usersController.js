@@ -18,6 +18,7 @@ const verifyToken = (token) => {
 usersController.getUser = async (req, res, next) => {
   try {
     // console.log(req.params);
+    console.log(req.body);
     const { username, password } = req.body;
     const user = await User.findOne({ username: username, password: password });
     res.locals.foundUser = user;
