@@ -174,3 +174,15 @@ h1 {
     display: flex;
   }
 }
+
+//^ Upload New Piece Page
+
+.form-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#imgContainer img {
+  max-width: 20%;
+}

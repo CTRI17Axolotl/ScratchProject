@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const UploadWidget = ({ setURL }) => {
   const cloudinaryRef = useRef();
@@ -15,6 +15,7 @@ const UploadWidget = ({ setURL }) => {
       function (error, result) {
         if (!error && result && result.event === "success") {
           setURL(result.info.secure_url);
+          console.log('result.info.secure_url: ', result.info.secure_url);
         }
         
       }
