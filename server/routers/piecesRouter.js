@@ -25,11 +25,8 @@ router.put('/:pieceId', piecesController.updateFields, async (req, res) => {
 
 router.post('/', piecesController.createArt, async (req, res) => {
   try {
-    const allArt = await Art.find(
-      {},
-      'artist title description image ownerId forSale price priceClass style sizeClass'
-    );
-    res.status(200).json(allArt);
+    console.log('New art created!');
+    res.status(200).json(res.locals.newArt);
   } catch (err) {
     return `Error in getting all art: ${err}`;
   }

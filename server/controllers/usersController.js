@@ -43,16 +43,18 @@ usersController.createUser = async (req, res, next) => {
   try {
     const { name, email, username, password } = req.body;
     console.log(req.body);
+    console.log('trim ', name.trim());
     // const token = req.headers.authorization.split(' ')[1];
     // const decodedToken = verifyToken(token);
     // const userId = decodedToken.userId;
     const newUser = await User.create({
       //userId
-      name: name,
-      email: email,
-      password: password,
-      username: username,
+      name: name.trim(),
+      email: email.trim(),
+      password: password.trim(),
+      username: username.trim()
     });
+    if(!name.trim() || !email.trim() || !password.trim() || !username.trim()) return res.status(403).json('Invalid inputs for account creation!');
     res.locals.newUser = newUser;
     return next();
   } catch (err) {

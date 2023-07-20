@@ -89,71 +89,77 @@ const SignIn = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-    });
-    if (res.ok) {
-      setIsSignUp(false);
-      setUser('');
-      setPassword('');
-    }
-  }
+      });
+       if(res.ok) {
+        setIsSignUp(false);
+        setUser('');
+        setPassword('');
+       }
+       else{
+        alert('Cannot leave inputs blank, please enter required new account information.')
+       }
+    };
 
   //use inputValue to fetch for user database
   return (
     <div className="signin-container">
       <div className="signin-form">
-        {isSignUp && (
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="text"
-              id="email"
-              value={email}
-              onChange={handleEmailChange}
-            />
-          </div>
-        )}
-        {isSignUp && (
-          <div>
-            <label htmlFor="name">Display Name:</label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={handleNameChange}
-            />
-          </div>
-        )}
-        <div className="signin-textbox">
-          <div>
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={handleUserChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="text"
-              id="password"
-              value={password}
-              onChange={handlePwChange}
-            />
-          </div>
-        </div>
-        <button className="button" onClick={handleSubmit}>
-          {isSignUp ? 'Sign Up!' : 'Sign In!'}
-        </button>
+        <form className="signup-textbox" onSubmit={handleSubmit}>
+          {isSignUp && (
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="text"
+                id="email"
+                value={email}
+                onChange={handleEmailChange}
+              />
+            </div>
+            )}
+            {isSignUp && (
+              <div>
+                <label htmlFor="name">Display Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={handleNameChange}
+                />
+              </div>
+            )}
+            <div>
+                <label htmlFor="username" className="off-center-label">Username:</label>
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={handleUserChange}
+                />
+            </div>
+            <div>
+              <label htmlFor="password" className="off-center-label">Password:</label>
+              <input
+                type="text"
+                id="password"
+                value={password}
+                onChange={handlePwChange}
+              />
+            </div>
+          <button className="button" onClick={handleSubmit}>
+            {isSignUp ? 'Sign Up!' : 'Sign In!'}
+          </button>
+        </form>
         <br />
         {!isSignUp && (
-          <p>
-            Don't have an account?
+          <div className = "new-account-text">
+            <p>
+                Don't have an account?
+              <br/>
+            </p>
             <button className="button" onClick={() => setIsSignUp(true)}>
               Sign Up Here
             </button>
-          </p>
+          </div>
         )}
       </div>
     </div>
