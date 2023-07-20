@@ -2,7 +2,7 @@ const ArtPiece = require('../models/piecesModel');
 const jwt = require('jsonwebtoken');
 const { generateSecretKey } = require('../utils/helpers');
 
-const artPieceController = {};
+const piecesController = {};
 
 const secretKey = generateSecretKey();
 // GET: display the listings of art
@@ -13,10 +13,11 @@ const verifyToken = (token) => {
   return jwt.verify(token, secretKey);
 };
 
-artPieceController.getArt = async (req, res, next) => {
+piecesController.getArt = async (req, res, next) => {
+  const { title } = req.body;
   try {
     console.log('entered getArt method in artPieceController');
-    const piece = await ArtPiece.find({ title: title });
+    const piece = await ArtPiece.find({ title });
     res.locals.foundArt = piece;
     return next();
   } catch (err) {
@@ -28,7 +29,7 @@ artPieceController.getArt = async (req, res, next) => {
   }
 };
 
-artPieceController.createArt = async (req, res, next) => {
+piecesController.createArt = async (req, res, next) => {
   // console.log('req: ', req.body);
   // format the query using the info passed in on the body
   console.log('req.body: ', req.body);
@@ -63,7 +64,7 @@ artPieceController.createArt = async (req, res, next) => {
   }
 };
 
-artPieceController.updateArt = async (req, res, next) => {
+piecesController.updateArt = async (req, res, next) => {
   try {
     // const { name } = req.params;
     const {
@@ -115,7 +116,7 @@ artPieceController.updateArt = async (req, res, next) => {
   }
 };
 
-artPieceController.deleteArt = async (req, res, next) => {
+piecesController.deleteArt = async (req, res, next) => {
   // const { name } = req.params;
   try {
     const { title } = req.body;
@@ -139,4 +140,4 @@ artPieceController.deleteArt = async (req, res, next) => {
   }
 };
 
-module.exports = artPieceController;
+module.exports = piecesController;

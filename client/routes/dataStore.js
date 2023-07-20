@@ -17,14 +17,15 @@ export default ({ children }) => {
   // filter price, size, collection, faved
   const [currentPieceFocus, setCurrentPieceFocus] = useState(false); // focus.pc
   const [userList, setUserList] = useState([]); // user list
-  const [activeUser, setActiveUser] = useState(false); // logged in user
+  const [activeUser, setActiveUser] = useState(); // logged in userfalse
+  const updateFullPieceList = (list) => {
+    setFullPieceList(list);
+    updateFilteredList(list);
+  };
 
-
-
-
-
-  const updateFilteredList = () => {
-    const currentPieceList = [...fullPieceList];
+  const updateFilteredList = (list = fullPieceList) => {
+    console.log('filtering with list: ', list);
+    const currentPieceList = [...list];
     let currentUserFaves;
     if (currentFilters[3][0] && activeUser) {
       //only show faves
@@ -58,8 +59,9 @@ export default ({ children }) => {
       }
       return true;
     });
-    setFilteredPieceList(updateFilteredList);
-    //setFilteredPieceList(randomize(updateFilteredList)); // shuffle each time?
+    console.log('Updated filter list: ', newFilteredPieceList);
+    // setFilteredPieceList(newFilteredPieceList);
+    setFilteredPieceList(randomize(newFilteredPieceList)); // shuffle each time?
   };
 
   const randomize = (array) => {
@@ -83,7 +85,7 @@ export default ({ children }) => {
 
   // Component-Accessible Store Values
   const store = {
-    setFullPieceList: setFullPieceList, // update fetched list
+    setFullPieceList: updateFullPieceList, // update fetched list
     filteredPieceList: filteredPieceList, // gallery display list
     updateFilteredList: updateFilteredList,
     currentFilters: currentFilters,
