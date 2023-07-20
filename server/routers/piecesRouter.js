@@ -23,10 +23,16 @@ router.put('/:pieceId', piecesController.updateFields, async (req, res) => {
   res.status(200).json(res.locals.result);
 });
 
-router.post('/', piecesController.createArt, (req, res) => {
-  console.log('New art added!');
-  res.status(200).json(res.locals.newArt);
-  return next();
+router.post('/', piecesController.createArt, async (req, res) => {
+  try {
+    const allArt = await Art.find(
+      {},
+      'artist title description image ownerId forSale price priceClass style sizeClass'
+    );
+    res.status(200).json(allArt);
+  } catch (err) {
+    return `Error in getting all art: ${err}`;
+  }
 });
 
 router.patch('/', piecesController.updateArt, (req, res) => {

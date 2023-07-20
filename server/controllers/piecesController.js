@@ -33,26 +33,10 @@ piecesController.getArt = async (req, res, next) => {
 
 piecesController.createArt = async (req, res, next) => {
   // console.log('req: ', req.body);
-  console.log(req.body);
-  const {
-    ownerId,
-    artist,
-    title,
-    description,
-    style,
-    image,
-    price,
-    sizeClass,
-    forSale,
- } = req.body;
-
+  
   try {
-    // const token = req.headers.authorization.split(' ')[1];
-    // const decodedToken = verifyToken(token);
-    // const userId = decodedToken.userId;
-
-    const newArt = await ArtPiece.create({
-      ownerId,
+    console.log(req.body);
+    const {
       artist,
       title,
       description,
@@ -60,7 +44,19 @@ piecesController.createArt = async (req, res, next) => {
       image,
       price,
       sizeClass,
-      forSale,
+    } = req.body;
+
+    const newArt = await ArtPiece.create({
+      artist: artist,
+      title: title,
+      description: description,
+      image: image,
+      ownerId: ownerId,
+      forSale: forSale,
+      price: price,
+      priceClass: priceClass,
+      style: style,
+      sizeClass: sizeClass,
     });
     res.locals.newArt = newArt;
     return next();
@@ -68,10 +64,13 @@ piecesController.createArt = async (req, res, next) => {
     return next({
       log: `The following error occured: ${err}`,
       status: 400,
-      message: { err: 'An error occured while trying to create an art piece' },
+      message: { err: 'An error occured while trying to create a user' },
     });
   }
 };
+// const token = req.headers.authorization.split(' ')[1];
+// const decodedToken = verifyToken(token);
+// const userId = decodedToken.userId
 
 piecesController.updateArt = async (req, res, next) => {
   try {
